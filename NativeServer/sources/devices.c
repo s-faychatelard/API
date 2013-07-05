@@ -11,12 +11,12 @@
 #include "../includes/devices.h"
 
 
-void initDeviceAction(DeviceAction *actions)
+unsigned int initDeviceAction(DeviceAction *actions)
 {
     DeviceAction *	ptr =  (DeviceAction *)&actions[0];
 	unsigned int index = 0;
     
-    while (ptr->type != 0)
+    while (ptr->type != ACTION_UNKNONW)
 	{
         if (ptr->hash==0)
         {
@@ -28,6 +28,8 @@ void initDeviceAction(DeviceAction *actions)
 		index++;
 		ptr = (DeviceAction *)&actions[index];
 	}
+    
+    return index;
 }
 
 void initDevicesTable(Device devices[])
@@ -35,6 +37,7 @@ void initDevicesTable(Device devices[])
     Device *	ptr =  (Device *)&devices[0];
     DevicePhysical * physical;
 	unsigned int index = 0;
+    unsigned int size;
     
     while (ptr->device != 0)
 	{
@@ -48,7 +51,11 @@ void initDevicesTable(Device devices[])
         
         printf("Device %s: 0x%x, type %s\n", ptr->name, ptr->hash, physical->type);
         
-        initDeviceAction(physical->actions);
+        size = initDeviceAction(physical->actions);
+        
+        printf("Size of action: %d\n", size);
+        
+        physical->number = size;
         
 		index++;
 		ptr = (Device *)&devices[index];

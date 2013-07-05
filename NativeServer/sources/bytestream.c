@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../includes/bytecodestream.h"
+#include "../includes/ByteStream.h"
 
 unsigned int get4FromBuffer(unsigned char *buffer)
 {
@@ -33,9 +33,9 @@ void set2ToBuffer(unsigned char *buffer, unsigned short integer)
 }
 
 
-BytecodeStream * newBytecodeStream(unsigned char * input)
+ByteStream * newByteStream(unsigned char * input)
 {
-    BytecodeStream * stream = (BytecodeStream *)malloc(sizeof(BytecodeStream));
+    ByteStream * stream = (ByteStream *)malloc(sizeof(ByteStream));
     
     stream->buffer = input;
     stream->current = stream->buffer;
@@ -43,36 +43,52 @@ BytecodeStream * newBytecodeStream(unsigned char * input)
     return stream;
 }
 
-void resetBytecodeStream(BytecodeStream * stream)
+void resetByteStream(ByteStream * stream)
 {
     stream->current = stream->buffer;
 }
 
-unsigned int getBytecodeStreamSize(BytecodeStream * stream)
+unsigned int getByteStreamSize(ByteStream * stream)
 {
     return (stream->current - stream->buffer);
 }
 
-void write1ToBytecodeStream(BytecodeStream * stream, unsigned char data)
+void write1ToByteStream(ByteStream * stream, unsigned char data)
 {
     *stream->current = data;
     stream->current++;
 }
 
-void write2ToBytecodeStream(BytecodeStream * stream, unsigned short data)
+void write2ToByteStream(ByteStream * stream, unsigned short data)
 {
     set2ToBuffer(stream->current, data);
     stream->current += 2;
 }
 
-void write4ToBytecodeStream(BytecodeStream * stream, unsigned int data)
+void write4ToByteStream(ByteStream * stream, unsigned int data)
 {
     set4ToBuffer(stream->current, data);
     stream->current += 4;
 }
 
-void writeBufferToBytecodeStream(BytecodeStream * stream, unsigned char * input, unsigned int size)
+void writeBufferToByteStream(ByteStream * stream, unsigned char * input, unsigned int size)
 {
     memcpy(stream->current, input,size);
     stream->current += size;
+}
+
+unsigned char read1FromByteStream(ByteStream * stream)
+{
+    unsigned char data = *stream->current;
+    stream->current++;
+    
+    return data;
+}
+
+unsigned int read4FromByteStream(ByteStream * stream)
+{
+    int integer = (stream->current[0]<<24)| (stream->current[1]<<16)|(stream->current[2]<<8)|(stream->current[3]);
+	    
+	stream->current +=4;
+    return integer;
 }

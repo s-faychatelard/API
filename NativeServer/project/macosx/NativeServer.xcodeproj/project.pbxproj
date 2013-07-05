@@ -12,7 +12,8 @@
 		C52246681786F558003C7F66 /* robotTest.c in Sources */ = {isa = PBXBuildFile; fileRef = C52246671786F558003C7F66 /* robotTest.c */; };
 		C522466E1786F706003C7F66 /* devices.c in Sources */ = {isa = PBXBuildFile; fileRef = C522466D1786F706003C7F66 /* devices.c */; };
 		C52246701786F723003C7F66 /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = C522466F1786F723003C7F66 /* hash.c */; };
-		C52246731786FB4F003C7F66 /* bytecodestream.c in Sources */ = {isa = PBXBuildFile; fileRef = C52246721786FB4F003C7F66 /* bytecodestream.c */; };
+		C52246731786FB4F003C7F66 /* bytestream.c in Sources */ = {isa = PBXBuildFile; fileRef = C52246721786FB4F003C7F66 /* bytestream.c */; };
+		C522467617870008003C7F66 /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = C522467517870008003C7F66 /* protocol.c */; };
 		C55121A51786BDE000DAC8A0 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C55121A41786BDE000DAC8A0 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +36,10 @@
 		C52246671786F558003C7F66 /* robotTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = robotTest.c; path = ../../sources/hal/test/robotTest.c; sourceTree = "<group>"; };
 		C522466D1786F706003C7F66 /* devices.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = devices.c; path = ../../sources/devices.c; sourceTree = "<group>"; };
 		C522466F1786F723003C7F66 /* hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hash.c; path = ../../sources/hash.c; sourceTree = "<group>"; };
-		C52246711786FB46003C7F66 /* bytecodestream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bytecodestream.h; path = ../../includes/bytecodestream.h; sourceTree = "<group>"; };
-		C52246721786FB4F003C7F66 /* bytecodestream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bytecodestream.c; path = ../../sources/bytecodestream.c; sourceTree = "<group>"; };
+		C52246711786FB46003C7F66 /* bytestream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bytestream.h; path = ../../includes/bytestream.h; sourceTree = "<group>"; };
+		C52246721786FB4F003C7F66 /* bytestream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bytestream.c; path = ../../sources/bytestream.c; sourceTree = "<group>"; };
+		C52246741786FDA3003C7F66 /* protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = protocol.h; path = ../../includes/protocol.h; sourceTree = "<group>"; };
+		C522467517870008003C7F66 /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = protocol.c; path = ../../sources/protocol.c; sourceTree = "<group>"; };
 		C55121961786BD9600DAC8A0 /* NativeServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NativeServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55121A41786BDE000DAC8A0 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../sources/main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,11 +95,12 @@
 		C55121A21786BDC300DAC8A0 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				C52246721786FB4F003C7F66 /* bytecodestream.c */,
+				C52246721786FB4F003C7F66 /* bytestream.c */,
 				C52246691786F6E2003C7F66 /* hal */,
 				C55121A41786BDE000DAC8A0 /* main.c */,
 				C522466D1786F706003C7F66 /* devices.c */,
 				C522466F1786F723003C7F66 /* hash.c */,
+				C522467517870008003C7F66 /* protocol.c */,
 			);
 			name = sources;
 			sourceTree = "<group>";
@@ -104,8 +108,9 @@
 		C55121A31786BDCE00DAC8A0 /* includes */ = {
 			isa = PBXGroup;
 			children = (
-				C52246711786FB46003C7F66 /* bytecodestream.h */,
+				C52246711786FB46003C7F66 /* bytestream.h */,
 				C52246661786EFFD003C7F66 /* devices.h */,
+				C52246741786FDA3003C7F66 /* protocol.h */,
 			);
 			name = includes;
 			sourceTree = "<group>";
@@ -165,7 +170,8 @@
 				C52246681786F558003C7F66 /* robotTest.c in Sources */,
 				C522466E1786F706003C7F66 /* devices.c in Sources */,
 				C52246701786F723003C7F66 /* hash.c in Sources */,
-				C52246731786FB4F003C7F66 /* bytecodestream.c in Sources */,
+				C52246731786FB4F003C7F66 /* bytestream.c in Sources */,
+				C522467617870008003C7F66 /* protocol.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

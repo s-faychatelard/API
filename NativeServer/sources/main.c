@@ -7,12 +7,14 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../libs/zeromq/include/zmq.h"
 
+#include "../includes/bytestream.h"
 #include "../includes/devices.h"
+#include "../includes/protocol.h"
 
-#define BUFFER_SIZE     16
 
 static void * zContext;
 static void * zSocket;
@@ -38,27 +40,72 @@ void shutdownServer(void)
 
 int main(void)
 {
+    NetworkCommand command;
     int result;
-    unsigned char buffer[BUFFER_SIZE];
+    unsigned char * outputBuffer;
+    unsigned char * inputBuffer;
+    
+    ByteStream * output;
+    ByteStream * input;
+    
+    unsigned int magic, sizePacket;
     
     printf("NativeServer Hello World\n");
     
+    outputBuffer = (unsigned char *)malloc(BUFFER_SIZE);
+    inputBuffer = (unsigned char *)malloc(BUFFER_SIZE);
+    
+    output = newByteStream(outputBuffer);
+    input = newByteStream(inputBuffer);
     
     initDevicesTable(robotDevices);
-    
-    
-    return 0;
-    
+        
     initServer();
     
     while(1)
     {
-        result = zmq_recv(zSocket, buffer, BUFFER_SIZE, 0);
+        result = zmq_recv(zSocket, inputBuffer, BUFFER_SIZE, 0);
         
-        printf("Received %d bytes : %s\n", result, buffer);
+        if (result>0)
+        {
+            resetByteStream(input);
+            
+            printf("Received %d bytes\n", result);
+        
+            magic = read4FromByteStream(input);
+            
+            if (magic!=PROTOCOL_MAGIC)
+            {
+                printf("Bad magic number !\n");
+                continue;
+            }
+            
+            sizePacket = read4FromByteStream(input);
+            command = read1FromByteStream(input);
+            
+            printf("sizeTotal %d Command %x\n", sizePacket, command);
+            
+            switch(command)
+            {
+                case COMMAND_GET_TABLE:
+                    
+                    resetByteStream(output);
+                    writeGetTableCommand(output, robotDevices);
+                    
+                    
+                    break;
+                case COMMAND_SEND:
+                    
+                    break;
+                default:
+                    zmq_send(zSocket, "WTF?", 4, 0);
+                    break;
+            }
             
             
-        zmq_send(zSocket, "OK", 2, 0);
+            zmq_send(zSocket, "WTF?", 4, 0);
+        }
+        
         
     }
     

@@ -48,7 +48,7 @@ typedef struct _device_physical_
 {
     char *          type;
     unsigned int    hash;
-    
+    unsigned int    number;
     DeviceAction * actions;
 } DevicePhysical;
 
@@ -66,6 +66,6 @@ extern unsigned int hash32(unsigned char *buf, unsigned int len);
 extern Device robotDevices[];
 
 extern void initDevicesTable(Device device[]);
-extern void initDeviceAction(DeviceAction *actions);
+extern unsigned int initDeviceAction(DeviceAction *actions);
 
 #endif

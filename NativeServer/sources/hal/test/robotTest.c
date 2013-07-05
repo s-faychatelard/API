@@ -25,7 +25,7 @@ DeviceAction motorAction[] =
 
 DevicePhysical motor =
 {
-    "Motor", 0x00, motorAction
+    "Motor", 0x00, 0, motorAction
 };
 
 void setAngle(Device * device, Value * value)
@@ -41,7 +41,7 @@ DeviceAction servoAction[] =
 
 DevicePhysical servo =
 {
-    "Servo", 0x00, servoAction
+    "Servo", 0x00, 0, servoAction
 };
 
 

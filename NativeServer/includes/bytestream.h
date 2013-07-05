@@ -1,0 +1,31 @@
+
+
+#ifndef asm2babvm_ByteStream_h
+#define asm2babvm_ByteStream_h
+
+typedef struct _byte_stream_
+{
+    unsigned char * buffer;
+    unsigned char * current;
+} ByteStream;
+
+
+extern ByteStream * newByteStream(unsigned char * input);
+
+extern void resetByteStream(ByteStream * stream);
+
+extern unsigned int getByteStreamSize(ByteStream * stream);
+
+extern void write1ToByteStream(ByteStream * stream, unsigned char data);
+
+extern void write2ToByteStream(ByteStream * stream, unsigned short data);
+
+extern void write4ToByteStream(ByteStream * stream, unsigned int data);
+
+extern void writeBufferToByteStream(ByteStream * stream, unsigned char * input, unsigned int size);
+
+
+extern unsigned char read1FromByteStream(ByteStream * stream);
+extern unsigned int read4FromByteStream(ByteStream * stream);
+
+#endif
