@@ -104,3 +104,37 @@ void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int de
     
     
 }
+
+
+void readSendCommand(ByteStream * stream, Device * devices)
+{
+    unsigned char device[255];
+    unsigned char action[255];
+    unsigned int nameSize;
+    int value;
+    
+    memset(device,0, 255);
+    memset(action,0, 255);
+    
+    // 4 device name size
+    // ... device name
+    nameSize = read4FromByteStream(stream);
+    readBufferFromByteStream(stream, device, nameSize);
+    
+    printf("Device name size %d\n", nameSize);
+    
+    // 4 action name size
+    // ... action name
+    
+    nameSize = read4FromByteStream(stream);
+    readBufferFromByteStream(stream, action, nameSize);
+    
+    // 4 value
+    value = (int)read4FromByteStream(stream);
+    
+    printf("Action name size %d\n", nameSize);
+    printf("Device %s Action %s Value %d\n", device, action, value);
+    
+}
+
+

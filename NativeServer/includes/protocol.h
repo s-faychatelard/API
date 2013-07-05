@@ -23,5 +23,6 @@ typedef enum _command_
 
 extern void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int deviceNumber);
 
+extern void readSendCommand(ByteStream * stream, Device * devices);
 
 #endif

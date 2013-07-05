@@ -7,6 +7,7 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 
 #include "../includes/devices.h"
 
@@ -64,3 +65,43 @@ unsigned int initDevicesTable(Device devices[])
     return index;
 }
 
+
+Device * getDeviceByName(Device * devices, unsigned char * name, unsigned int nameSize)
+{
+    unsigned int index = 0;
+    Device *	ptr =  (Device *)&devices[0];
+    
+    while (ptr->device != 0)
+	{
+        if (strncmp(ptr->name, (const char *)name, nameSize)==0)
+        {
+            return ptr;
+        }
+        
+		index++;
+		ptr = (Device *)&devices[index];
+	}
+    
+    return 0;
+}
+
+DeviceAction * getDeviceActionByName(Device * device, unsigned char * name, unsigned int nameSize)
+{
+    DevicePhysical * physical = device->device;
+    DeviceAction * actions = physical->actions;
+    DeviceAction *	ptr =  (DeviceAction *)&actions[0];
+	unsigned int index = 0;
+    
+    while (ptr->type != ACTION_UNKNONW)
+	{
+        if (strncmp(ptr->name, (const char *)name, nameSize)==0)
+        {
+            return ptr;
+        }
+        
+		index++;
+		ptr = (DeviceAction *)&actions[index];
+	}
+    
+    return 0;
+}

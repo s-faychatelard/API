@@ -92,3 +92,11 @@ unsigned int read4FromByteStream(ByteStream * stream)
 	stream->current +=4;
     return integer;
 }
+
+void readBufferFromByteStream(ByteStream * stream, unsigned char * output, unsigned int size)
+{
+    printf("%s\n", stream->current);
+    
+    memcpy(output, stream->current,size);
+    stream->current += size;
+}

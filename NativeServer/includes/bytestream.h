@@ -29,5 +29,6 @@ extern void writeBufferToByteStream(ByteStream * stream, unsigned char * input, 
 
 extern unsigned char read1FromByteStream(ByteStream * stream);
 extern unsigned int read4FromByteStream(ByteStream * stream);
+extern void readBufferFromByteStream(ByteStream * stream, unsigned char * output, unsigned int size);
 
 #endif

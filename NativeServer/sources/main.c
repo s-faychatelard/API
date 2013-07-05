@@ -99,6 +99,11 @@ int main(void)
                     break;
                 case COMMAND_SEND:
                     
+                    readSendCommand(input, robotDevices);
+                    
+                    
+                    zmq_send(zSocket, "WTF?", 4, 0);
+                    
                     break;
                 default:
                     zmq_send(zSocket, "WTF?", 4, 0);

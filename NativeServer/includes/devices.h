@@ -42,7 +42,6 @@ typedef struct _action_
     ActionCallback  action;
 } DeviceAction;
 
-#define ACTION_MAX  16
 
 typedef struct _device_physical_
 {
@@ -65,6 +64,11 @@ extern unsigned int hash32(unsigned char *buf, unsigned int len);
 extern Device robotDevices[];
 
 extern unsigned int initDevicesTable(Device device[]);
+
 extern unsigned int initDeviceAction(DeviceAction *actions);
+
+extern Device * getDeviceByName(Device * devices, unsigned char * name, unsigned int nameSize);
+
+extern DeviceAction * getDeviceActionByName(Device * device, unsigned char * name, unsigned int nameSize);
 
 #endif

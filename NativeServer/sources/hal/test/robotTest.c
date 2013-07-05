@@ -47,9 +47,9 @@ DevicePhysical servo =
 
 Device robotDevices[] =
 {
-    { "leftMotor",      0x00,           &motor },
-    { "rightMotor",     0x00,           &motor },
-    { "servoPourDancerLaZoumba", 0x00,  &servo },
-    { "servoHead",      0x00,           &servo },
+    { "leftWheel",      0x00,           &motor },
+    { "rightWheel",     0x00,           &motor },
+//    { "servoPourDancerLaZoumba", 0x00,  &servo },
+//    { "servoHead",      0x00,           &servo },
     {   0,              0x00,           0 }
 };
