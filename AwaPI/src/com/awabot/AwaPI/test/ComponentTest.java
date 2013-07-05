@@ -14,11 +14,11 @@ public class ComponentTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		GlobalFactory.addComponent("leftWheel", "devices.Motor");
-		GlobalFactory.addComponent("rightWheel", "devices.Motor");
+		GlobalFactory.addComponent("leftWheel", "devices.Motor", true);
+		GlobalFactory.addComponent("rightWheel", "devices.Motor", true);
 		
-		GlobalFactory.addComponent("avance", "components.navigation.Avance");
-		GlobalFactory.addComponent("tourne", "components.navigation.Tourne");
+		GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
+		GlobalFactory.addComponent("tourne", "components.navigation.Tourne", true);
 	}
 	
 	@Test

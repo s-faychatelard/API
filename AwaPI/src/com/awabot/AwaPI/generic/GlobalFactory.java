@@ -12,11 +12,11 @@ public class GlobalFactory {
 	private final static Map<String, Component> idPool = new HashMap<String, Component>();
 	private final static Map<String, ArrayList<Component>> typePool = new HashMap<String, ArrayList<Component>>();
 	
-	public static boolean addComponent(String id, String type) {
+	public static boolean addComponent(String id, String type, boolean standardComponent) {
 		
 		Component obj = null;
 		try {
-			Class<?> cl = Class.forName(API_PREFIX + type);
+			Class<?> cl = Class.forName( ((standardComponent) ? API_PREFIX : "") + type);
 			Constructor<?> con = cl.getConstructor();
 			obj = (Component)con.newInstance();
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException e) {
