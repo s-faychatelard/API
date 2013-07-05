@@ -1,5 +1,0 @@
-package com.awabot.AwaPI.generic;
-
-public interface Device implements Component {
-
-}
