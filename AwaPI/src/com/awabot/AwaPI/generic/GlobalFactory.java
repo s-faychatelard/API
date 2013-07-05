@@ -12,10 +12,11 @@ public class GlobalFactory {
 	private final static Map<String, Component> idPool = new HashMap<String, Component>();
 	private final static Map<String, ArrayList<Component>> typePool = new HashMap<String, ArrayList<Component>>();
 	
-	public static boolean addComponent(String id, String type, boolean standardComponent) {
+	public static void addComponent(String id, String type, boolean standardComponent) {
 		
 		Component obj = null;
 		try {
+			
 			Class<?> cl = Class.forName( ((standardComponent) ? API_PREFIX : "") + type);
 			Constructor<?> con = cl.getConstructor();
 			obj = (Component)con.newInstance();
@@ -31,11 +32,10 @@ public class GlobalFactory {
 		{
 			l = new ArrayList<>();
 		}
-		l.add(obj);
+		if (!l.contains(l))
+			l.add(obj);
 		
 		typePool.put(type, l);
-		
-		return true;
 	}
 	
 	public static ArrayList<Component> getComponentsByType(String type) {
@@ -44,5 +44,10 @@ public class GlobalFactory {
 
 	public static Component getComponentById(String id) {
 		return idPool.get(id);
+	}
+	
+	public static void clearComponents() {
+		idPool.clear();
+		typePool.clear();
 	}
 }

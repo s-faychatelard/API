@@ -28,6 +28,15 @@ public class BytecodeStream {
 		currentIndex = 0;
 	}
 	
+	public byte read8Bits()
+	{
+		byte b = buffer[currentIndex];
+	    
+		currentIndex+= 1;
+		
+		return b;
+	}
+	
 	public Integer read32Bits()
 	{
 		int integer = ((buffer)[currentIndex]<<24)| ((buffer)[currentIndex+1]<<16)|((buffer)[currentIndex+2]<<8)|((buffer)[currentIndex+3]);
@@ -36,14 +45,19 @@ public class BytecodeStream {
 		
 		return integer;
 	}
-
-	public Integer read16Bits()
+	
+	public byte[] readNBits(Integer numBits)
 	{
-		int integer = ((buffer)[currentIndex]<<8)|((buffer)[currentIndex+1]);
-	    
-		currentIndex+= 2;
+		byte []temp = new byte[numBits];
 		
-		return integer;
+		for(int i=0;i<numBits;i++)
+		{
+			temp[i] = buffer[i];
+		}
+		
+		currentIndex+=numBits;
+		
+		return temp;
 	}
 	
 	public void write32Bits(Integer integer)

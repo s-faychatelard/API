@@ -1,10 +1,22 @@
 package com.awabot.AwaPI.generic;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Component {
 	
+	private Map<String, Boolean> availability = new HashMap<>();
+	
+	public void addActionAvailable(String actionName, Boolean available) {
+		availability.put(actionName, available);
+	}
+	
 	public void exec(Object caller, String methodName, Object ... args) {
+		
+		if (this.availability.get(methodName) != null && this.availability.get(methodName).booleanValue() == false) {
+			throw new IllegalStateException("Method " + methodName + " not available on your device");
+		}
 		
 		Class<?> classes[] = null;
 		try {

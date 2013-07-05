@@ -7,21 +7,19 @@ import com.awabot.AwaPI.network.client.NetworkClient;
  */
 public abstract class Device extends Component {
 	
-	protected NetworkClient network;
-	
-	public Integer readInt(Object caller, String actionName, Integer value) {
-		return 0;//return network.readInt(caller, actionName, value);
+	public Integer readInt(Object caller, String actionName) {
+		return NetworkClient.getInstance().readInt(caller, actionName);
 	}
 	
 	public void writeInt(Object caller, String actionName, Integer value) {
-		//network.writeInt(caller, actionName, value);
+		NetworkClient.getInstance().writeInt(caller, actionName, value);
 	}
 	
-	public Float readFloat(Object caller, String actionName, Float value) {
-		return (float) 0.0;//network.readFloat(caller, actionName, value);
+	/*public Float readFloat(Object caller, String actionName) {
+		return NetworkClient.getInstance().readFloat(caller, actionName);
 	}
 	
 	public void writeFloat(Object caller, String actionName, Float value) {
-		//network.writeFloat(caller, actionName, value);
-	}
+		NetworkClient.getInstance().writeFloat(caller, actionName, value);
+	}*/
 }

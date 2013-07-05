@@ -1,7 +1,7 @@
 package com.awabot.AwaPI.components.navigation;
 
+import com.awabot.AwaPI.AwaPI;
 import com.awabot.AwaPI.generic.Component;
-import com.awabot.AwaPI.generic.GlobalFactory;
 
 public class Tourne extends Component {
 	
@@ -14,7 +14,7 @@ public class Tourne extends Component {
 	}
 	
 	public void rotate(Integer leftSpeed, Integer rightSpeed) {
-		GlobalFactory.getComponentById("leftWheel").exec(GlobalFactory.getComponentById("leftWheel"), "setSpeed", leftSpeed);
-		GlobalFactory.getComponentById("rightWheel").exec(GlobalFactory.getComponentById("rightWheel"), "setSpeed", rightSpeed);
+		AwaPI.getComponentById("leftWheel").exec(AwaPI.getComponentById("leftWheel"), "setSpeed", leftSpeed);
+		AwaPI.getComponentById("rightWheel").exec(AwaPI.getComponentById("rightWheel"), "setSpeed", rightSpeed);
 	}
 }

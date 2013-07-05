@@ -52,7 +52,7 @@ public class ZmqNetworkClient extends NetworkClient {
 	
 	public void writeInt(Object caller, String actionName, Integer i) 
 	{
-		beginWrite(caller,actionName,i);
+		//writeHeader(caller,actionName,i);
 	
 		zSocket.send(stream.toByteArray());
 		byte []buffer = zSocket.recv();
