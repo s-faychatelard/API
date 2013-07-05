@@ -11,6 +11,17 @@ public class BytecodeStream {
 		buffer = new byte[size];
 	}
 	
+	byte []toByteArray()
+	{
+		byte []temp = new byte[currentIndex];
+		
+		for(int i=0;i<currentIndex;i++)
+		{
+			temp[i] = buffer[i];
+		}
+		
+		return temp;
+	}
 	
 	public void reset()
 	{
@@ -43,19 +54,23 @@ public class BytecodeStream {
 		buffer[currentIndex++] = (byte)(temp>>8);
 		buffer[currentIndex++] = (byte)(temp);
 		
-		System.out.println( (char)buffer[currentIndex-4] + " " 
-		+ (char)buffer[currentIndex-3] + " " 
-		+ (char)buffer[currentIndex-2] + " " 
-		+(char)buffer[currentIndex-1]);
+		/*
+		System.out.println( buffer[currentIndex-4] + " " 
+		+ buffer[currentIndex-3] + " " 
+		+ buffer[currentIndex-2] + " " 
+		+ buffer[currentIndex-1]);*/
 		
 	}
-
-	
 
 	public void write16Bits(Integer integer)
 	{
 		int temp = integer.intValue();
 		buffer[currentIndex] = (byte)(temp>>8);
 		buffer[currentIndex] = (byte)(temp);
+	}
+	
+	public void write8Bits(byte b)
+	{
+		buffer[currentIndex++] = b;
 	}
 }

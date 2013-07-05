@@ -18,6 +18,7 @@ public class NetworkTest {
 		
 		client.close();
 		
+		client.beginWrite(new Object(),	"avancer",1234);
 		
 		System.out.println("End of test...");
 	}

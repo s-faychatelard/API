@@ -39,7 +39,9 @@ public class ZmqNetworkClient extends NetworkClient {
 	public void close()
 	{
 		zSocket.close();
-//		zContext.
+		
+		// moche pa :-(
+//		zContext.close() 
 	}
 
 	public Integer readInt(Object caller, String actionName)
@@ -51,6 +53,10 @@ public class ZmqNetworkClient extends NetworkClient {
 	public void writeInt(Object caller, String actionName, Integer i) 
 	{
 		beginWrite(caller,actionName,i);
+	
+		zSocket.send(stream.toByteArray());
+		byte []buffer = zSocket.recv();
+		
 		
 	}
 

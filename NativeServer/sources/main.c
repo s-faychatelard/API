@@ -10,11 +10,13 @@
 
 #include "../libs/zeromq/include/zmq.h"
 
+#include "../includes/devices.h"
 
 #define BUFFER_SIZE     16
 
 static void * zContext;
 static void * zSocket;
+
 
 
 void initServer(void)
@@ -41,6 +43,11 @@ int main(void)
     
     printf("NativeServer Hello World\n");
     
+    
+    initDevicesTable(robotDevices);
+    
+    
+    return 0;
     
     initServer();
     
