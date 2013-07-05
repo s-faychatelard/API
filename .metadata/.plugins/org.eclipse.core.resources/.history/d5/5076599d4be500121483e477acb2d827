@@ -1,0 +1,5 @@
+package com.awabot.AwaPI.generic;
+
+public class Device extends Component {
+
+}
