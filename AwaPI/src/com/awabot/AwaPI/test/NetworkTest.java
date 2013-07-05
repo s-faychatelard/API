@@ -6,17 +6,20 @@ import com.awabot.AwaPI.network.client.*;
 public class NetworkTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		
 		System.out.println("TEST OF NETWORK");
 		
-		NetworkClient client = new NetworkClient();
+		ZmqNetworkClient client = new ZmqNetworkClient();
 
+		client.open();
+		
 		client.test();
 		
 		client.close();
 		
+		
+		System.out.println("End of test...");
 	}
 
 }

@@ -1,39 +1,44 @@
 package com.awabot.AwaPI.network.client;
 
-import org.zeromq.ZMQ;
-import org.zeromq.ZMQ.Socket;
-import org.zeromq.ZContext;
+public abstract class NetworkClient {
 
-public class NetworkClient {
+	private static final int BUFFER_SIZE = 16;
 	
-	ZContext	zContext;
-	Socket 		zSocket;
+	private BytecodeStream stream;
 	
 	public NetworkClient()
 	{
-		zContext = new ZContext();
-		
-		zSocket = zContext.createSocket(ZMQ.REQ);
-		
-		zSocket.connect("tcp://localhost:8687");
+		stream = new BytecodeStream(BUFFER_SIZE);
 	}
 	
-	public void test()
-	{
-		
-		zSocket.send("Hello");
-		
-		String str = zSocket.recvStr();
-		
-		System.out.println("Receive : " + str);
-		
-	}
+	public abstract boolean open();
 	
+	public abstract void close();
 	
-	public void close()
-	{
-		zSocket.close();
-		zContext.close();
-	}
+	public abstract void writeInt(Object caller, String actionName, Integer i);
+	
+	public abstract Integer readInt(Object caller, String actionName);
 
+	
+	protected void beginWrite(Object caller, String actionName, Integer integer)
+	{
+		String name = caller.getClass().getSimpleName();
+		
+		// reset buffer index
+		stream.reset();
+		
+		
+		int h = Hash.get(name.getBytes());
+		
+		System.out.println("Hash = " + h);
+		
+		stream.write32Bits(h);
+		
+		h = Hash.get(actionName.getBytes());
+		stream.write32Bits(h);
+		
+		stream.write32Bits(integer);
+		
+	}
+	
 }
