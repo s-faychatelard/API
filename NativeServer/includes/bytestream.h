@@ -1,7 +1,7 @@
 
 
-#ifndef asm2babvm_ByteStream_h
-#define asm2babvm_ByteStream_h
+#ifndef NativeServer_ByteStream_h
+#define NativeServer_ByteStream_h
 
 typedef struct _byte_stream_
 {

@@ -95,8 +95,6 @@ unsigned int read4FromByteStream(ByteStream * stream)
 
 void readBufferFromByteStream(ByteStream * stream, unsigned char * output, unsigned int size)
 {
-    printf("%s\n", stream->current);
-    
     memcpy(output, stream->current,size);
     stream->current += size;
 }

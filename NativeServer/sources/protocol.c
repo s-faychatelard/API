@@ -108,32 +108,58 @@ void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int de
 
 void readSendCommand(ByteStream * stream, Device * devices)
 {
-    unsigned char device[255];
-    unsigned char action[255];
-    unsigned int nameSize;
+    unsigned char deviceName[255];
+    unsigned char actionName[255];
+    
+    unsigned int deviceSize, actionSize;
     int value;
     
-    memset(device,0, 255);
-    memset(action,0, 255);
+    Device * device;
+    DeviceAction * action;
+    
+    memset(deviceName,0, 255);
+    memset(actionName,0, 255);
     
     // 4 device name size
     // ... device name
-    nameSize = read4FromByteStream(stream);
-    readBufferFromByteStream(stream, device, nameSize);
-    
-    printf("Device name size %d\n", nameSize);
+    deviceSize = read4FromByteStream(stream);
+    readBufferFromByteStream(stream, deviceName, deviceSize);
     
     // 4 action name size
     // ... action name
     
-    nameSize = read4FromByteStream(stream);
-    readBufferFromByteStream(stream, action, nameSize);
+    actionSize = read4FromByteStream(stream);
+    readBufferFromByteStream(stream, actionName, actionSize);
     
     // 4 value
     value = (int)read4FromByteStream(stream);
     
-    printf("Action name size %d\n", nameSize);
-    printf("Device %s Action %s Value %d\n", device, action, value);
+//    printf("Device %s Action %s Value %d\n", deviceName, actionName, value);
+    
+    device = getDeviceByName(devices, deviceName, deviceSize);
+    
+    if (device == 0)
+    {
+        return;
+    }
+    
+    action = getDeviceActionByName(device,actionName,actionSize);
+    
+    if (action==0)
+    {
+        return;
+    }
+    
+    printf("-> execute on %s.%s = %d\n", device->name, action->name, value);
+    
+    //todo select correct value in Value struct
+    
+    Value v;
+    v.integer = value;
+    action->action(device, &v);
+    
+    // todo if read action, send back value of structure
+    
     
 }
 
