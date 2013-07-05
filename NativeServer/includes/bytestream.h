@@ -9,6 +9,8 @@ typedef struct _byte_stream_
     unsigned char * current;
 } ByteStream;
 
+extern void set4ToBuffer(unsigned char *buffer, unsigned int integer);
+
 
 extern ByteStream * newByteStream(unsigned char * input);
 

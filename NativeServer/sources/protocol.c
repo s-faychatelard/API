@@ -42,7 +42,7 @@ void writeActionTable(ByteStream * stream, DeviceAction * actions)
     
 }
 
-void writeGetTableCommand(ByteStream * stream, Device * devices)
+void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int deviceNumber)
 {
     unsigned int index = 0;
     unsigned int sizeTotal = 0;
@@ -55,9 +55,11 @@ void writeGetTableCommand(ByteStream * stream, Device * devices)
     // 4 magic
     // 4 size total
     // 1 command
+    // 4 device number
     write4ToByteStream(stream, PROTOCOL_MAGIC);
     write4ToByteStream(stream, 0);
     write1ToByteStream(stream, COMMAND_GET_TABLE);
+    write4ToByteStream(stream, deviceNumber);
     
     // payload :
     while (dev->device != 0)
@@ -94,6 +96,11 @@ void writeGetTableCommand(ByteStream * stream, Device * devices)
 	}
     
     sizeTotal = getByteStreamSize(stream);
+    
+    sizeTotal = sizeTotal - 8;
+    set4ToBuffer(stream->buffer+4, sizeTotal);
+    
+    printf("writeGetTableCommand: sizeTotal %d\n", sizeTotal);
     
     
 }

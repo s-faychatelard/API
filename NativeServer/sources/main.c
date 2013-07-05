@@ -48,7 +48,7 @@ int main(void)
     ByteStream * output;
     ByteStream * input;
     
-    unsigned int magic, sizePacket;
+    unsigned int magic, sizePacket, deviceNumber;
     
     printf("NativeServer Hello World\n");
     
@@ -58,7 +58,7 @@ int main(void)
     output = newByteStream(outputBuffer);
     input = newByteStream(inputBuffer);
     
-    initDevicesTable(robotDevices);
+    deviceNumber = initDevicesTable(robotDevices);
         
     initServer();
     
@@ -76,22 +76,25 @@ int main(void)
             
             if (magic!=PROTOCOL_MAGIC)
             {
-                printf("Bad magic number !\n");
+                printf("ERROR: Bad magic number !\n");
                 continue;
             }
             
             sizePacket = read4FromByteStream(input);
             command = read1FromByteStream(input);
             
-            printf("sizeTotal %d Command %x\n", sizePacket, command);
+            printf("--> sizeTotal %d Command %x\n", sizePacket, command);
             
             switch(command)
             {
                 case COMMAND_GET_TABLE:
                     
                     resetByteStream(output);
-                    writeGetTableCommand(output, robotDevices);
+                    writeGetTableCommand(output, robotDevices, deviceNumber);
                     
+                    printf("Send %d bytes for %d devices\n", getByteStreamSize(output), deviceNumber);
+                    
+                    zmq_send(zSocket, output->buffer, getByteStreamSize(output), 0);
                     
                     break;
                 case COMMAND_SEND:
@@ -102,8 +105,6 @@ int main(void)
                     break;
             }
             
-            
-            zmq_send(zSocket, "WTF?", 4, 0);
         }
         
         

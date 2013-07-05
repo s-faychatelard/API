@@ -57,7 +57,6 @@ struct _device_
 {
     char *          name;
     unsigned int    hash;
-    
     DevicePhysical *  device;
 };
 
@@ -65,7 +64,7 @@ extern unsigned int hash32(unsigned char *buf, unsigned int len);
 
 extern Device robotDevices[];
 
-extern void initDevicesTable(Device device[]);
+extern unsigned int initDevicesTable(Device device[]);
 extern unsigned int initDeviceAction(DeviceAction *actions);
 
 #endif

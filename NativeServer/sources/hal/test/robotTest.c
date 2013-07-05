@@ -25,7 +25,7 @@ DeviceAction motorAction[] =
 
 DevicePhysical motor =
 {
-    "Motor", 0x00, 0, motorAction
+    "devices.Motor", 0x00, 0, motorAction
 };
 
 void setAngle(Device * device, Value * value)
@@ -41,15 +41,15 @@ DeviceAction servoAction[] =
 
 DevicePhysical servo =
 {
-    "Servo", 0x00, 0, servoAction
+    "devices.Servo", 0x00, 0, servoAction
 };
 
 
 Device robotDevices[] =
 {
-    { "leftMotor",      0x00,   &motor },
-    { "rightMotor",     0x00,   &motor },
-    { "servoPourDancerLaZoumba", 0x00, &servo },
-    { "servoHead",      0x00,   &servo },
-    {   0,              0x00,   0 }
+    { "leftMotor",      0x00,           &motor },
+    { "rightMotor",     0x00,           &motor },
+    { "servoPourDancerLaZoumba", 0x00,  &servo },
+    { "servoHead",      0x00,           &servo },
+    {   0,              0x00,           0 }
 };

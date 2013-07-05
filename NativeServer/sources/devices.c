@@ -32,7 +32,7 @@ unsigned int initDeviceAction(DeviceAction *actions)
     return index;
 }
 
-void initDevicesTable(Device devices[])
+unsigned int initDevicesTable(Device devices[])
 {
     Device *	ptr =  (Device *)&devices[0];
     DevicePhysical * physical;
@@ -61,5 +61,6 @@ void initDevicesTable(Device devices[])
 		ptr = (Device *)&devices[index];
 	}
     
+    return index;
 }
 
