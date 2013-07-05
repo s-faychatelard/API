@@ -1,6 +1,0 @@
-API
-===
-
-Java API
-
-Hello
