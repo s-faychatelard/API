@@ -1,0 +1,25 @@
+package com.awabot.AwaPI.generic;
+
+public class GlobalFactory {
+
+	/**
+	 * Contains all loaded images
+	 */
+	private final static Map<String, Image> imagePool = new HashMap<String, Image>();
+
+	/**
+	 * Give a path and the corresponding image
+	 * 
+	 * @param path is the generally the filename
+	 * @return the image corresponding to the path
+	 */
+	public static Image getImage(String path) {
+		Objects.requireNonNull(path);
+		Image image = imagePool.get(path);
+		if (image == null) {
+			image = Toolkit.getDefaultToolkit().getImage(ImageFactory.class.getClass().getResource("/resources/"+path));
+			imagePool.put(path, Objects.requireNonNull(image));
+		}
+		return image;
+	}
+}
