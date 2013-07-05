@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C52246631786C2E3003C7F66 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C52246621786C2E3003C7F66 /* libzmq.a */; };
+		C52246651786C2FC003C7F66 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C52246641786C2FC003C7F66 /* libstdc++.6.dylib */; };
 		C55121A51786BDE000DAC8A0 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C55121A41786BDE000DAC8A0 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C52246621786C2E3003C7F66 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = ../../libs/zeromq/libzmq.a; sourceTree = "<group>"; };
+		C52246641786C2FC003C7F66 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		C55121961786BD9600DAC8A0 /* NativeServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NativeServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55121A41786BDE000DAC8A0 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../sources/main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C52246651786C2FC003C7F66 /* libstdc++.6.dylib in Frameworks */,
+				C52246631786C2E3003C7F66 /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +47,8 @@
 		C551218D1786BD9600DAC8A0 = {
 			isa = PBXGroup;
 			children = (
+				C52246641786C2FC003C7F66 /* libstdc++.6.dylib */,
+				C52246621786C2E3003C7F66 /* libzmq.a */,
 				C55121A31786BDCE00DAC8A0 /* includes */,
 				C55121A21786BDC300DAC8A0 /* sources */,
 				C55121971786BD9600DAC8A0 /* Products */,
@@ -188,6 +196,10 @@
 		C55121A01786BD9600DAC8A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../libs/zeromq\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -195,6 +207,10 @@
 		C55121A11786BD9600DAC8A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../libs/zeromq\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
