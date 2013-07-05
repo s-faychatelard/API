@@ -14,8 +14,6 @@ public class NetworkTest {
 
 		client.open();
 		
-		client.test();
-		
 		client.close();
 		
 		//client.writeHeader(new Object(),	"avancer",1234);

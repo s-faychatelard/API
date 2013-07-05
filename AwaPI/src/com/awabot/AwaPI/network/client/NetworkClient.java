@@ -2,6 +2,9 @@ package com.awabot.AwaPI.network.client;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.Charset;
+
+import com.awabot.AwaPI.generic.GlobalFactory;
 
 public abstract class NetworkClient {
 
@@ -10,14 +13,19 @@ public abstract class NetworkClient {
 	private static final int MAGIC = 0x42415359;
 	protected static final int BUFFER_SIZE = 1024;
 	
-	protected BytecodeStream stream;
+	protected BytecodeStream readStream;
+	protected BytecodeStream writeStream;
 	
 	public NetworkClient() {
-		stream = new BytecodeStream(BUFFER_SIZE);
+		
+		writeStream = new BytecodeStream(BUFFER_SIZE);
+		readStream = new BytecodeStream(BUFFER_SIZE);
 	}
 	
 	public static void createInstance(Class<?> networkClientClass) {
+		
 		try {
+			
 			Constructor<?> con = networkClientClass.getConstructor();
 			networkInstance = (NetworkClient)con.newInstance();
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -27,6 +35,7 @@ public abstract class NetworkClient {
 	}
 	
 	public static NetworkClient getInstance() {
+		
 		return networkInstance;
 	}
 	
@@ -34,10 +43,43 @@ public abstract class NetworkClient {
 	
 	public abstract void close();
 	
-	public abstract void writeInt(Object caller, String actionName, Integer i);
+	public abstract void writeBuffer();
 	
-	public abstract Integer readInt(Object caller, String actionName);
+	
+	public void init() {
+		
+		open();
+		writeHeader(1, (byte)0x0);
+		writeBuffer();
+		this.readTable();
+	}
+	
+	public void writeInt(String deviceName, String actionName, Integer value) {
+		// Command get table
+		// 4 octets Device Name size
+		// x octets Device Name
+		// 4 octets Action Name size
+		// x octets Action Name
+		// 4 octets Value
 
+		writeStream.reset();
+		writeHeader(4 + deviceName.length() + 4 + actionName.length() + 4, (byte)0x1);
+		writeStream.write32Bits(deviceName.length());
+		writeStream.writeNBytes(deviceName.getBytes(), deviceName.length());
+		
+		System.out.println("Write deviceName " + deviceName.length() + " : " + deviceName);
+		
+		writeStream.write32Bits(actionName.length());
+		writeStream.writeNBytes(actionName.getBytes(), actionName.length());
+		
+		System.out.println("Write actionName " + actionName.length() + " : " + actionName);
+		
+		writeStream.write32Bits(value);
+		
+		System.out.println("Write value : " + value);
+		
+		writeBuffer();
+	}
 	
 	public void writeHeader(Integer sizeToSend, byte command) {
 		
@@ -47,16 +89,16 @@ public abstract class NetworkClient {
 		// 1 octet  Command
 		
 		// reset buffer index
-		stream.reset();
+		writeStream.reset();
 		
 		// send magic
-		stream.write32Bits(MAGIC);
+		writeStream.write32Bits(MAGIC);
 		
 		// send size
-		stream.write32Bits(sizeToSend);
+		writeStream.write32Bits(sizeToSend);
 		
 		// send command
-		stream.write8Bits(command);
+		writeStream.write8Bits(command);
 		
 		/*//String name = caller.getClass().getSimpleName();
 		
@@ -76,21 +118,40 @@ public abstract class NetworkClient {
 	
 	public void readTable() {
 		// Command get table
+		// 4 octets Devices number
 		// 4 octets Name size
 		// x octets Name
 		// 4 octets Type size
 		// x octets Type name
 		// 4 octets Action number
 		
-		Integer nameSize = stream.read32Bits();
-		String name = stream.readNBits(nameSize).toString();
+		Integer magic = readStream.read32Bits();
+		Integer globalSize = readStream.read32Bits();
+		byte command = readStream.read8Bits();
 		
-		Integer typeSize = stream.read32Bits();
-		String type = stream.readNBits(typeSize).toString();
+		System.out.println("Magic 0x" + Integer.toHexString(magic));
+		System.out.println("Global size " + globalSize);
+		System.out.println("Command " + command);
 		
-		Integer numActions = stream.read32Bits();
-		for(int i=0; i<numActions; i++) {
-			readAction();
+		Integer numDevices = readStream.read32Bits();
+		
+		for(int i=0; i<numDevices; i++) {
+			
+			Integer nameSize = readStream.read32Bits();
+			String name = new String(readStream.readNBytes(nameSize));
+			
+			Integer typeSize = readStream.read32Bits();
+			String type = new String(readStream.readNBytes(typeSize));
+			
+			System.out.println("Name " + nameSize + " : " + name);
+			System.out.println("Type " + typeSize + " : " + type);
+			
+			GlobalFactory.addComponent(name, type, true);
+			
+			Integer numActions = readStream.read32Bits();
+			for(int j=0; j<numActions; j++) {
+				readAction();
+			}
 		}
 	}
 	
@@ -101,11 +162,11 @@ public abstract class NetworkClient {
 		// 4 octets Action name size
 		// x octets Action name
 		
-		byte action = stream.read8Bits();
-		byte value = stream.read8Bits();
+		byte action = readStream.read8Bits();
+		byte value = readStream.read8Bits();
 		
-		Integer actionNameSize = stream.read32Bits();
-		String actionName = stream.readNBits(actionNameSize).toString();
+		Integer actionNameSize = readStream.read32Bits();
+		String actionName = readStream.readNBytes(actionNameSize).toString();
 	}
 	
 }

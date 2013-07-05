@@ -11,7 +11,16 @@ public class AwaPI {
 	
 	public static boolean init() {
 		NetworkClient.createInstance(ZmqNetworkClient.class);
+		NetworkClient.getInstance().init();
+		
+		/* For testing */
+		GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
+		
 		return true;
+	}
+	
+	public static void shutdown() {
+		NetworkClient.getInstance().close();
 	}
 	
 	public static ArrayList<Component> getComponentsByType(String type) {
@@ -20,17 +29,5 @@ public class AwaPI {
 
 	public static Component getComponentById(String id) {
 		return GlobalFactory.getComponentById(id);
-	}
-
-	/* For testing */
-	public static void main(String[] args) {
-		AwaPI.init();
-		
-		GlobalFactory.addComponent("leftWheel", "devices.Motor", true);
-		GlobalFactory.addComponent("rightWheel", "devices.Motor", true);
-		
-		GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
-		
-		AwaPI.getComponentById("avance").exec(AwaPI.getComponentById("avance"), "start", 42);
 	}
 }

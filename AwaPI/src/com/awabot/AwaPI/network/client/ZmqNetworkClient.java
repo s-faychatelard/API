@@ -11,53 +11,35 @@ public class ZmqNetworkClient extends NetworkClient {
 	
 	public ZmqNetworkClient()
 	{
+		super();
+		
 		zContext = new ZContext();
 	}
 	
 	public boolean open()
 	{
 		zSocket = zContext.createSocket(ZMQ.REQ);
-		zSocket.connect("tcp://localhost:8687");
+		zSocket.connect("tcp://192.168.11.144:8687");
 		
 		return true;
 	}
 	
-	public void test()
-	{
-		
-		zSocket.send("COUCOU");
-		
-		System.out.println("Send ok, now receive...");
-		
-		byte [] buffer = zSocket.recv();
-		
-		System.out.println("Receive : " + buffer.length + " bytes " + (char )buffer[0] );
-		
-	}
-	
-	
 	public void close()
 	{
-		zSocket.close();
-		
-		// moche pa :-(
-//		zContext.close() 
-	}
-
-	public Integer readInt(Object caller, String actionName)
-	{
-		
-		return 0;
+		zContext.close();
 	}
 	
-	public void writeInt(Object caller, String actionName, Integer i) 
+	public void writeBuffer()
 	{
-		//writeHeader(caller,actionName,i);
-	
-		zSocket.send(stream.toByteArray());
+		zSocket.send(writeStream.toByteArray());
+		writeStream.reset();
+		
 		byte []buffer = zSocket.recv();
 		
+		System.out.println("Read : " + buffer.length);
 		
+		readStream.reset();
+		readStream.writeNBytes(buffer, buffer.length);
+		readStream.reset();
 	}
-
 }

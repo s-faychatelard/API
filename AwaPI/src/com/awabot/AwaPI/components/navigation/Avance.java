@@ -5,13 +5,17 @@ import com.awabot.AwaPI.generic.Component;
 
 public class Avance extends Component {
 	
+	public Avance(String name) {
+		super(name);
+	}
+
 	public void start(Integer speed) {
-		AwaPI.getComponentById("leftWheel").exec(AwaPI.getComponentById("leftWheel"), "setSpeed", speed);
-		AwaPI.getComponentById("rightWheel").exec(AwaPI.getComponentById("rightWheel"), "setSpeed", speed);
+		AwaPI.getComponentById("leftWheel").exec("setSpeed", speed);
+		AwaPI.getComponentById("rightWheel").exec("setSpeed", speed);
 	}
 	
 	public void stop() {
-		AwaPI.getComponentById("leftWheel").exec(AwaPI.getComponentById("leftWheel"), "setSpeed", 0);
-		AwaPI.getComponentById("rightWheel").exec(AwaPI.getComponentById("rightWheel"), "setSpeed", 0);
+		AwaPI.getComponentById("leftWheel").exec("setSpeed", 0);
+		AwaPI.getComponentById("rightWheel").exec("setSpeed", 0);
 	}
 }

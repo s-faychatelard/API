@@ -39,25 +39,42 @@ public class BytecodeStream {
 	
 	public Integer read32Bits()
 	{
-		int integer = ((buffer)[currentIndex]<<24)| ((buffer)[currentIndex+1]<<16)|((buffer)[currentIndex+2]<<8)|((buffer)[currentIndex+3]);
+		int integer	 = ((buffer)[currentIndex]<<24) & 0xFF000000;
+		integer 	|= ((buffer)[currentIndex+1]<<16) & 0x00FF0000;
+		integer 	|= ((buffer)[currentIndex+2]<<8) & 0x0000FF00;
+		integer 	|= ((buffer)[currentIndex+3]) & 0x000000FF;
 	    
 		currentIndex+=4;
 		
 		return integer;
 	}
 	
-	public byte[] readNBits(Integer numBits)
+	public byte[] readNBytes(Integer numBytes)
 	{
-		byte []temp = new byte[numBits];
+		byte []temp = new byte[numBytes];
 		
-		for(int i=0;i<numBits;i++)
+		for(int i=currentIndex, j=0;i<currentIndex+numBytes;i++,j++)
 		{
-			temp[i] = buffer[i];
+			temp[j] = buffer[i];
 		}
 		
-		currentIndex+=numBits;
+		currentIndex+=numBytes;
 		
 		return temp;
+	}
+	
+	public void write8Bits(byte b)
+	{
+		buffer[currentIndex++] = b;
+	}
+	
+	public void write16Bits(Integer integer)
+	{
+		int temp = integer.intValue();
+		buffer[currentIndex] = (byte)(temp>>8);
+		buffer[currentIndex] = (byte)(temp);
+		
+		currentIndex+=2;
 	}
 	
 	public void write32Bits(Integer integer)
@@ -75,16 +92,14 @@ public class BytecodeStream {
 		+ buffer[currentIndex-1]);*/
 		
 	}
-
-	public void write16Bits(Integer integer)
-	{
-		int temp = integer.intValue();
-		buffer[currentIndex] = (byte)(temp>>8);
-		buffer[currentIndex] = (byte)(temp);
-	}
 	
-	public void write8Bits(byte b)
+	public void writeNBytes(byte[] buffer, Integer numBytes)
 	{
-		buffer[currentIndex++] = b;
+		for(int i=currentIndex, j=0;i<currentIndex+numBytes;i++, j++)
+		{
+			this.buffer[i] = buffer[j];
+		}
+		
+		currentIndex+=numBytes;
 	}
 }

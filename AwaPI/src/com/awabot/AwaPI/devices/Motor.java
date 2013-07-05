@@ -4,15 +4,13 @@ import com.awabot.AwaPI.generic.Device;
 
 public class Motor extends Device {
 	
-	public void setSpeed(Integer speed) {
-		System.out.println("Speed of set to " + speed);
-		
-		//this.writeInt(this, "setSpeed", speed);
+	public Motor(String name) {
+		super(name);
 	}
-	
-	/*public void setSpeed(Float speed) {
-		System.out.println("Speed set to " + speed);
+
+	public void setSpeed(Integer speed) {
+		System.out.println("Speed of " + this.name + " set to " + speed);
 		
-		// this.writeFloat(this, "setSpeed", speed);
-	}*/
+		this.writeInt(this.name, "setSpeed", speed);
+	}
 }

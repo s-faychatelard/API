@@ -12,14 +12,14 @@ public class GlobalFactory {
 	private final static Map<String, Component> idPool = new HashMap<String, Component>();
 	private final static Map<String, ArrayList<Component>> typePool = new HashMap<String, ArrayList<Component>>();
 	
-	public static void addComponent(String id, String type, boolean standardComponent) {
+	public static void addComponent(String id, String type, boolean standardComponent) throws IllegalStateException {
 		
 		Component obj = null;
 		try {
 			
 			Class<?> cl = Class.forName( ((standardComponent) ? API_PREFIX : "") + type);
-			Constructor<?> con = cl.getConstructor();
-			obj = (Component)con.newInstance();
+			Constructor<?> con = cl.getConstructor(String.class);
+			obj = (Component)con.newInstance(id);
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException e) {
 			
 			throw new IllegalStateException("The class " + type + " doesn't exist");
@@ -44,10 +44,5 @@ public class GlobalFactory {
 
 	public static Component getComponentById(String id) {
 		return idPool.get(id);
-	}
-	
-	public static void clearComponents() {
-		idPool.clear();
-		typePool.clear();
 	}
 }

@@ -6,23 +6,29 @@ import java.util.Map;
 
 public abstract class Component {
 	
+	protected final String name;
+	
 	private Map<String, Boolean> availability = new HashMap<>();
+	
+	public Component(String name) {
+		this.name = name;
+	}
 	
 	public void addActionAvailable(String actionName, Boolean available) {
 		availability.put(actionName, available);
 	}
 	
-	public void exec(Object caller, String methodName, Object ... args) {
+	public void exec(String methodName, Object ... args) {
 		
-		if (this.availability.get(methodName) != null && this.availability.get(methodName).booleanValue() == false) {
+		/*if (this.availability.get(methodName) == null || this.availability.get(methodName).booleanValue() == false) {
 			throw new IllegalStateException("Method " + methodName + " not available on your device");
-		}
+		}*/
 		
 		Class<?> classes[] = null;
 		try {
 			
 			if (args == null) {
-				caller.getClass().getMethod(methodName).invoke(caller);
+				this.getClass().getMethod(methodName).invoke(this);
 				return;
 			}
 			
@@ -34,7 +40,7 @@ public abstract class Component {
 			}
 
 			/* Get the method and invoke it */
-			caller.getClass().getMethod(methodName, classes).invoke(caller, args);
+			this.getClass().getMethod(methodName, classes).invoke(this, args);
 			
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			
@@ -45,7 +51,7 @@ public abstract class Component {
 				s.append(" ");
 			}
 			
-			throw new IllegalStateException("The method " + methodName + " in " + caller.getClass() 
+			throw new IllegalStateException("The method " + methodName + " in " + this.getClass() 
 												+ " with parameter" + ((args.length > 1) ? "s" : "") 
 												+ " typed " + s.toString() + "doesn't exist");
 		}
