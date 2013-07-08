@@ -15,6 +15,8 @@ public class AwaPI {
 		
 		/* For testing */
 		GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
+		GlobalFactory.addComponent("tourne", "components.navigation.Tourne", true);
+		GlobalFactory.addComponent("avanceTourne", "components.navigation.AvanceTourne", true);
 		
 		return true;
 	}

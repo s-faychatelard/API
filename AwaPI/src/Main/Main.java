@@ -12,7 +12,7 @@ public class Main {
 			AwaPI.shutdown();
 		}
 		
-		AwaPI.getComponentById("avance").exec("start", 150);
+		AwaPI.getComponentById("avanceTourne").exec("start", 150);
 		
 		AwaPI.shutdown();
 	}

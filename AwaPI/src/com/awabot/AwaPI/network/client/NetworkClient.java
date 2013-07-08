@@ -2,7 +2,6 @@ package com.awabot.AwaPI.network.client;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.Charset;
 
 import com.awabot.AwaPI.generic.GlobalFactory;
 
