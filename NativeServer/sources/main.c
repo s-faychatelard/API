@@ -62,6 +62,8 @@ int main(void)
         
     initServer();
     
+    printf("NativeServer initialized ! now run...\n");
+    
     while(1)
     {
         result = zmq_recv(zSocket, inputBuffer, BUFFER_SIZE, 0);
@@ -70,7 +72,7 @@ int main(void)
         {
             resetByteStream(input);
             
-            printf("Received %d bytes\n", result);
+//            printf("Received %d bytes\n", result);
         
             magic = read4FromByteStream(input);
             
@@ -83,7 +85,7 @@ int main(void)
             sizePacket = read4FromByteStream(input);
             command = read1FromByteStream(input);
             
-            printf("--> sizeTotal %d Command %x\n", sizePacket, command);
+//            printf("--> sizeTotal %d Command %x\n", sizePacket, command);
             
             switch(command)
             {
@@ -92,7 +94,7 @@ int main(void)
                     resetByteStream(output);
                     writeGetTableCommand(output, robotDevices, deviceNumber);
                     
-                    printf("Send %d bytes for %d devices\n", getByteStreamSize(output), deviceNumber);
+//                    printf("Send %d bytes for %d devices\n", getByteStreamSize(output), deviceNumber);
                     
                     zmq_send(zSocket, output->buffer, getByteStreamSize(output), 0);
                     

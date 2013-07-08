@@ -100,7 +100,7 @@ void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int de
     sizeTotal = sizeTotal - 8;
     set4ToBuffer(stream->buffer+4, sizeTotal);
     
-    printf("writeGetTableCommand: sizeTotal %d\n", sizeTotal);
+//    printf("writeGetTableCommand: sizeTotal %d\n", sizeTotal);
     
     
 }
