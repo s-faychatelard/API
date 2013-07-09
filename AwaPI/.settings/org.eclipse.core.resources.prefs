@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/com/awabot/AwaPI/AwaPI.java=UTF-8
 encoding//src/com/awabot/AwaPI/components/navigation/Avance.java=UTF-8
+encoding//src/com/awabot/AwaPI/generic/Device.java=UTF-8
+encoding//src/com/awabot/AwaPI/network/client/NetworkClient.java=UTF-8

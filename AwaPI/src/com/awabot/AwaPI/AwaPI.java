@@ -6,6 +6,7 @@ import com.awabot.AwaPI.generic.Component;
 import com.awabot.AwaPI.generic.GlobalFactory;
 import com.awabot.AwaPI.network.client.NetworkClient;
 import com.awabot.AwaPI.network.client.ZmqNetworkClient;
+import com.awabot.AwaPI.xml.XmlParser;
 
 public class AwaPI {
 	
@@ -14,9 +15,12 @@ public class AwaPI {
 		NetworkClient.getInstance().init();
 		
 		/* For testing */
-		GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
+		XmlParser.parseXmlFile("/Users/sylvain/Documents/Git/API/AwaPI/components.xml");
+		
+		/*GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
 		GlobalFactory.addComponent("tourne", "components.navigation.Tourne", true);
 		GlobalFactory.addComponent("avanceTourne", "components.navigation.AvanceTourne", true);
+		GlobalFactory.addComponent("head", "components.head.HeadVision", true);*/
 		
 		return true;
 	}

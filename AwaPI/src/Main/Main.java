@@ -12,8 +12,13 @@ public class Main {
 			AwaPI.shutdown();
 		}
 		
-		AwaPI.getComponentById("avanceTourne").exec("start", 150);
-		
+		try {
+			AwaPI.getComponentById("avanceTourne").exec("start", 150);
+			AwaPI.getComponentById("head").exec("startMovement");
+		} catch (IllegalStateException e) {
+			System.err.println(e.getMessage());
+			AwaPI.shutdown();
+		}
 		AwaPI.shutdown();
 	}
 }

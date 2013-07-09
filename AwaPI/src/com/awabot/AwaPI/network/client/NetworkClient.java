@@ -1,8 +1,12 @@
 package com.awabot.AwaPI.network.client;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import com.awabot.AwaPI.generic.Device;
+import com.awabot.AwaPI.generic.Device.Action;
+import com.awabot.AwaPI.generic.Device.Value;
 import com.awabot.AwaPI.generic.GlobalFactory;
 
 public abstract class NetworkClient {
@@ -54,7 +58,7 @@ public abstract class NetworkClient {
 	}
 	
 	public void writeInt(String deviceName, String actionName, Integer value) {
-		// Command get table
+		// Command Write Int
 		// 4 octets Device Name size
 		// x octets Device Name
 		// 4 octets Action Name size
@@ -80,6 +84,38 @@ public abstract class NetworkClient {
 		writeBuffer();
 	}
 	
+	public Integer readInt(String deviceName, String actionName) {
+		// Command Read Int
+		// 4 octets Device Name size
+		// x octets Device Name
+		// 4 octets Action Name size
+		// x octets Action Name
+
+		writeStream.reset();
+		writeHeader(4 + deviceName.length() + 4 + actionName.length() + 4, (byte)0x2);
+		writeStream.write32Bits(deviceName.length());
+		writeStream.writeNBytes(deviceName.getBytes(), deviceName.length());
+		
+		System.out.println("Write deviceName " + deviceName.length() + " : " + deviceName);
+		
+		writeStream.write32Bits(actionName.length());
+		writeStream.writeNBytes(actionName.getBytes(), actionName.length());
+		
+		System.out.println("Write actionName " + actionName.length() + " : " + actionName);
+		
+		writeBuffer();
+		
+		Integer magic = readStream.read32Bits();
+		Integer globalSize = readStream.read32Bits();
+		byte command = readStream.read8Bits();
+		
+		System.out.println("Magic 0x" + Integer.toHexString(magic));
+		System.out.println("Global size " + globalSize);
+		System.out.println("Command " + command);
+		
+		return readStream.read32Bits();
+	}
+	
 	public void writeHeader(Integer sizeToSend, byte command) {
 		
 		// Header
@@ -98,21 +134,6 @@ public abstract class NetworkClient {
 		
 		// send command
 		writeStream.write8Bits(command);
-		
-		/*//String name = caller.getClass().getSimpleName();
-		
-		System.out.println("Begin write: caller=" + name + " action=" + actionName + " int=" + integer);
-		
-		int h = Hash.get(name.getBytes());
-		
-		System.out.println("Hash = " + h);
-		
-		stream.write32Bits(h);
-		
-		h = Hash.get(actionName.getBytes());
-		stream.write32Bits(h);
-		
-		stream.write32Bits(integer);*/
 	}
 	
 	public void readTable() {
@@ -145,27 +166,39 @@ public abstract class NetworkClient {
 			System.out.println("Name " + nameSize + " : " + name);
 			System.out.println("Type " + typeSize + " : " + type);
 			
-			GlobalFactory.addComponent(name, type, true);
+			Device device = (Device)GlobalFactory.addComponent(name, type, true);
 			
 			Integer numActions = readStream.read32Bits();
 			for(int j=0; j<numActions; j++) {
-				readAction();
+				readAction(device);
 			}
 		}
 	}
 	
-	public void readAction() {
+	public void readAction(Device device) {
 		// Action
-		// 1 octet  Type action
-		// 1 octet  Type value
+		// 1 octet  Type action (READ | WRITE)
+		// 1 octet  Type value ( UNKNOWN | INTEGER | FLOAT | ... )
 		// 4 octets Action name size
 		// x octets Action name
 		
 		byte action = readStream.read8Bits();
 		byte value = readStream.read8Bits();
 		
+		Action a = Action.getAction(action);
+		Value v = Value.getValue(value);
+		
 		Integer actionNameSize = readStream.read32Bits();
-		String actionName = readStream.readNBytes(actionNameSize).toString();
+		String actionName = null;
+		try {
+			actionName = new String(readStream.readNBytes(actionNameSize), "ASCII");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		device.addAction(actionName, a, v);
+		
+		System.out.println(actionName + " " + a.toString() + " " + v.toString());
 	}
 	
 }

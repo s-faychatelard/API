@@ -12,7 +12,7 @@ public class GlobalFactory {
 	private final static Map<String, Component> idPool = new HashMap<String, Component>();
 	private final static Map<String, ArrayList<Component>> typePool = new HashMap<String, ArrayList<Component>>();
 	
-	public static void addComponent(String id, String type, boolean standardComponent) throws IllegalStateException {
+	public static Component addComponent(String id, String type, boolean standardComponent) throws IllegalStateException {
 		
 		Component obj = null;
 		try {
@@ -36,13 +36,21 @@ public class GlobalFactory {
 			l.add(obj);
 		
 		typePool.put(type, l);
+		
+		return obj;
 	}
 	
 	public static ArrayList<Component> getComponentsByType(String type) {
+		if (!typePool.containsKey(type)) {
+			throw new IllegalStateException("No component typed " + type + "exists for now");
+		}
 		return typePool.get(type);
 	}
 
 	public static Component getComponentById(String id) {
+		if (!idPool.containsKey(id)) {
+			throw new IllegalStateException("The component " + id + " doesn't exist");
+		}
 		return idPool.get(id);
 	}
 }

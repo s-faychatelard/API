@@ -6,8 +6,8 @@ import org.zeromq.ZContext;
 
 public class ZmqNetworkClient extends NetworkClient {
 	
-	ZContext	zContext;
-	Socket 		zSocket;
+	private final ZContext	zContext;
+	private Socket 		zSocket;
 	
 	public ZmqNetworkClient()
 	{
@@ -20,6 +20,7 @@ public class ZmqNetworkClient extends NetworkClient {
 	{
 		zSocket = zContext.createSocket(ZMQ.REQ);
 		zSocket.connect("tcp://192.168.11.144:8687");
+		//zSocket.connect("tcp://127.0.0.1:8687");
 		
 		return true;
 	}
@@ -31,10 +32,12 @@ public class ZmqNetworkClient extends NetworkClient {
 	
 	public void writeBuffer()
 	{
-		zSocket.send(writeStream.toByteArray());
+		byte []buffer = writeStream.toByteArray();
+		
+		zSocket.send(buffer);
 		writeStream.reset();
 		
-		byte []buffer = zSocket.recv();
+		buffer = zSocket.recv();
 		
 		System.out.println("Read : " + buffer.length);
 		

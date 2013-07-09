@@ -7,29 +7,29 @@ import java.util.Map;
 public abstract class Component {
 	
 	protected final String name;
-	
-	private Map<String, Boolean> availability = new HashMap<>();
+	private final Map<String, String> deviceNames = new HashMap<>();
 	
 	public Component(String name) {
 		this.name = name;
 	}
 	
-	public void addActionAvailable(String actionName, Boolean available) {
-		availability.put(actionName, available);
+	public void addAlias(String name, String alias) {
+		deviceNames.put(name, alias);
 	}
 	
-	public void exec(String methodName, Object ... args) {
-		
-		/*if (this.availability.get(methodName) == null || this.availability.get(methodName).booleanValue() == false) {
-			throw new IllegalStateException("Method " + methodName + " not available on your device");
-		}*/
+	protected String alias(String name) {
+		if (!deviceNames.containsKey(name))
+			return name;
+		return deviceNames.get(name);
+	}
+	
+	public Object exec(String methodName, Object ... args) throws IllegalStateException {
 		
 		Class<?> classes[] = null;
 		try {
-			
-			if (args == null) {
-				this.getClass().getMethod(methodName).invoke(this);
-				return;
+			System.out.println(args.length);
+			if (args.length == 0) {
+				return this.getClass().getMethod(methodName).invoke(this);
 			}
 			
 			/* Construct an array of Class of each parameter */
@@ -40,9 +40,9 @@ public abstract class Component {
 			}
 
 			/* Get the method and invoke it */
-			this.getClass().getMethod(methodName, classes).invoke(this, args);
+			return this.getClass().getMethod(methodName, classes).invoke(this, args);
 			
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException e) {
 			
 			StringBuilder s = new StringBuilder();
 			Integer i=0;
@@ -54,6 +54,10 @@ public abstract class Component {
 			throw new IllegalStateException("The method " + methodName + " in " + this.getClass() 
 												+ " with parameter" + ((args.length > 1) ? "s" : "") 
 												+ " typed " + s.toString() + "doesn't exist");
+			
+		} catch (InvocationTargetException e) {
+			throw new IllegalStateException("The method " + methodName + " in " + this.getClass() 
+					+ " failed with error : \n\t" + e.getCause().getMessage());
 		}
 	}
 }

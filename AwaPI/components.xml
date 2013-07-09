@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="POB">
+    <component name="avance" type="components.navigation.Avance" standard="true"/>
+    <component name="tourne" type="components.navigation.Tourne" standard="true"/>
+    <component name="avanceTourne" type="components.navigation.AvanceTourne" standard="true"/>
+    <component name="head" type="components.head.HeadVision" standard="true">
+        <device name="servo" alias="rantanplan"/>
+    </component>
+</robot>

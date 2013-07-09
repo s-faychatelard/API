@@ -10,12 +10,12 @@ public class Avance extends Component {
 	}
 
 	public void start(Integer speed) {
-		AwaPI.getComponentById("leftWheel").exec("setSpeed", speed);
-		AwaPI.getComponentById("rightWheel").exec("setSpeed", speed);
+		AwaPI.getComponentById(alias("leftWheel")).exec("setSpeed", speed);
+		AwaPI.getComponentById(alias("rightWheel")).exec("setSpeed", speed);
 	}
 	
 	public void stop() {
-		AwaPI.getComponentById("leftWheel").exec("setSpeed", 0);
-		AwaPI.getComponentById("rightWheel").exec("setSpeed", 0);
+		AwaPI.getComponentById(alias("leftWheel")).exec("setSpeed", 0);
+		AwaPI.getComponentById(alias("rightWheel")).exec("setSpeed", 0);
 	}
 }

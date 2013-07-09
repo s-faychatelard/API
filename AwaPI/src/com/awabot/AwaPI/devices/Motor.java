@@ -10,7 +10,6 @@ public class Motor extends Device {
 
 	public void setSpeed(Integer speed) {
 		System.out.println("Speed of " + this.name + " set to " + speed);
-		
 		this.writeInt(this.name, "setSpeed", speed);
 	}
 }
