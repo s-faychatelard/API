@@ -57,7 +57,7 @@ public abstract class NetworkClient {
 		this.readTable();
 	}
 	
-	public void writeInt(String deviceName, String actionName, Integer value) {
+	public synchronized void writeInt(String deviceName, String actionName, Integer value) {
 		// Command Write
 		// 4 octets Device Name size
 		// x octets Device Name
@@ -87,7 +87,7 @@ public abstract class NetworkClient {
 		writeBuffer();
 	}
 	
-	public Integer readInt(String deviceName, String actionName) {
+	public synchronized Integer readInt(String deviceName, String actionName) {
 		// Command Read Int
 		// 4 octets Device Name size
 		// x octets Device Name

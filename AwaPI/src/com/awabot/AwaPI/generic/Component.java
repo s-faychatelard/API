@@ -27,7 +27,7 @@ public abstract class Component {
 		
 		Class<?> classes[] = null;
 		try {
-			System.out.println(args.length);
+			
 			if (args.length == 0) {
 				return this.getClass().getMethod(methodName).invoke(this);
 			}
