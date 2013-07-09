@@ -3,22 +3,28 @@
 //  NativeServer
 //
 //  Created by bburles on 05/07/13.
-//  Copyright (c) 2013 Dviance. All rights reserved.
+//  Copyright (c) 2013 Awabot. All rights reserved.
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
+#include "../includes/list.h"
 #include "../includes/devices.h"
 
+List userDeviceList;
 
-unsigned int initDeviceAction(DeviceAction *actions)
+unsigned int initDeviceAction(List *actions)
 {
-    DeviceAction *	ptr =  (DeviceAction *)&actions[0];
+    DeviceAction *	ptr;
 	unsigned int index = 0;
     
-    while (ptr->type != ACTION_UNKNONW)
-	{
+    ListNode *n = actions->first;
+    while (n != NULL)
+    {
+        ptr = (DeviceAction *)n->data;
+        
         if (ptr->hash==0)
         {
             ptr->hash = hash32((unsigned char *)ptr->name, strlen(ptr->name));
@@ -26,61 +32,116 @@ unsigned int initDeviceAction(DeviceAction *actions)
         
         printf("\tAction %s: 0x%x\n", ptr->name, ptr->hash);
         
-		index++;
-		ptr = (DeviceAction *)&actions[index];
-	}
+        index++;
+        n = n->next;
+    }
     
     return index;
 }
 
-unsigned int initDevicesTable(Device devices[])
+void addUserDeviceAction(ActionCallback callback, char *name, char * type)
 {
-    Device *	ptr =  (Device *)&devices[0];
+    UserDeviceAction * user = (UserDeviceAction *)malloc(sizeof(UserDeviceAction));
+    
+    user->action = callback;
+    user->name = malloc(strlen(name));
+    strcpy(user->name,name);
+   
+    user->type = malloc(strlen(type));
+    strcpy(user->type,type);
+
+    listAddElement(&userDeviceList, user);
+}
+
+ActionCallback getUserCallbackByName(char * name, char * type)
+{
+    UserDeviceAction * ptr;
+    ListNode *n = userDeviceList.first;
+    while (n != NULL)
+    {
+        ptr = (UserDeviceAction *)n->data;
+        
+        if (strcmp(ptr->name, name)==0 && strcmp(ptr->type, type)==0)
+        {
+            return ptr->action;
+        }
+        
+        n = n->next;
+    }
+    
+    return 0;
+}
+
+unsigned int initDevicesTable(List * devices)
+{
+    Device *	ptr;
     DevicePhysical * physical;
 	unsigned int index = 0;
     unsigned int size;
     
-    while (ptr->device != 0)
-	{
-        ptr->hash = hash32((unsigned char *)ptr->name, strlen(ptr->name));
+    ListNode *n = devices->first;
+    while (n != NULL)
+    {
+        ptr = (Device *)n->data;
+        ptr->hash = hash32((unsigned char *)ptr->name, (unsigned int)strlen(ptr->name));
 		
         physical = ptr->device;
         if (physical->hash==0)
         {
-            physical->hash = hash32(physical->type, strlen(physical->type));
+            physical->hash = hash32((unsigned char *)physical->type, (unsigned int)strlen(physical->type));
         }
         
         printf("Device %s: 0x%x, type %s\n", ptr->name, ptr->hash, physical->type);
         
-        size = initDeviceAction(physical->actions);
+        size = initDeviceAction(&physical->actions);
         
         printf("Size of action: %d\n", size);
         
-        physical->number = size;
         
 		index++;
-		ptr = (Device *)&devices[index];
+		n = n->next;
 	}
     
     return index;
 }
 
 
-Device * getDeviceByName(Device * devices, unsigned char * name, unsigned int nameSize)
+Device * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize)
 {
     unsigned int index = 0;
-    Device *	ptr =  (Device *)&devices[0];
+    Device *	ptr;
     
-    while (ptr->device != 0)
-	{
+    ListNode *n = devices->first;
+    while (n != NULL)
+    {
+        ptr = (Device *)n->data;
+        
         if (strncmp(ptr->name, (const char *)name, nameSize)==0)
         {
             return ptr;
         }
         
-		index++;
-		ptr = (Device *)&devices[index];
+		n = n->next;
 	}
+    
+    return 0;
+}
+
+DevicePhysical * getDevicePhysicalByName(List * physicals, char * name)
+{
+    DevicePhysical * ptr;
+    ListNode *n = physicals->first;
+    while (n != NULL)
+    {
+        ptr = (DevicePhysical *)n->data;
+    
+        if (strcmp(name,ptr->type)==0)
+        {
+            return ptr;
+        }
+        
+        n = n->next;
+    }
     
     return 0;
 }
@@ -88,20 +149,21 @@ Device * getDeviceByName(Device * devices, unsigned char * name, unsigned int na
 DeviceAction * getDeviceActionByName(Device * device, unsigned char * name, unsigned int nameSize)
 {
     DevicePhysical * physical = device->device;
-    DeviceAction * actions = physical->actions;
-    DeviceAction *	ptr =  (DeviceAction *)&actions[0];
-	unsigned int index = 0;
+    List * actions = &physical->actions;
+    DeviceAction *	ptr;
     
-    while (ptr->type != ACTION_UNKNONW)
-	{
+    ListNode *n = actions->first;
+    while (n != NULL)
+    {
+        ptr = (DeviceAction *)n->data;
+        
         if (strncmp(ptr->name, (const char *)name, nameSize)==0)
         {
             return ptr;
         }
         
-		index++;
-		ptr = (DeviceAction *)&actions[index];
-	}
+        n = n->next;
+    }
     
     return 0;
 }

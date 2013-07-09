@@ -3,29 +3,32 @@
 //  NativeServer
 //
 //  Created by bburles on 05/07/13.
-//  Copyright (c) 2013 Dviance. All rights reserved.
+//  Copyright (c) 2013 Awabot. All rights reserved.
 //
 
 #include <stdio.h>
 #include <string.h>
 
+#include "../includes/list.h"
 #include "../includes/bytestream.h"
 #include "../includes/devices.h"
 #include "../includes/protocol.h"
 
 
 
-void writeActionTable(ByteStream * stream, DeviceAction * actions)
+void writeActionTable(ByteStream * stream, List * actions)
 {
-    DeviceAction *	ptr =  (DeviceAction *)&actions[0];
-	unsigned int index = 0;
+    DeviceAction *	ptr;
     unsigned int size;
     
-    while (ptr->type != ACTION_UNKNONW)
-	{
+    ListNode *n = actions->first;
+    while (n != NULL)
+    {
+        ptr = (DeviceAction *)n->data;
+        
         // action:
-        //      1 type action
-        //      1 type value
+        //      1 type action (read / write)
+        //      1 type value (integer, float, array)
         //      4 size
         //      ... name
         
@@ -36,20 +39,18 @@ void writeActionTable(ByteStream * stream, DeviceAction * actions)
         write4ToByteStream(stream, size);
         writeBufferToByteStream(stream, (unsigned char *)ptr->name, size);
         
-		index++;
-		ptr = (DeviceAction *)&actions[index];
+        n = n->next;
 	}
     
 }
 
-void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int deviceNumber)
+void writeGetTableCommand(ByteStream * stream, List * devices)
 {
-    unsigned int index = 0;
     unsigned int sizeTotal = 0;
     
     unsigned int nameSize;
     
-    Device *	dev =  (Device *)&devices[0];
+    Device *	dev;
     DevicePhysical * physical;
     
     // 4 magic
@@ -59,11 +60,14 @@ void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int de
     write4ToByteStream(stream, PROTOCOL_MAGIC);
     write4ToByteStream(stream, 0);
     write1ToByteStream(stream, COMMAND_GET_TABLE);
-    write4ToByteStream(stream, deviceNumber);
+    write4ToByteStream(stream, devices->size);
     
     // payload :
-    while (dev->device != 0)
-	{
+    ListNode *n = devices->first;
+    while (n != NULL)
+    {
+        dev = (Device *)n->data;
+        
         // get table
         // 4 size
         // ... name
@@ -86,13 +90,12 @@ void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int de
         physical = dev->device;
         
         // 4 action number
-        write4ToByteStream(stream, physical->number);
+        write4ToByteStream(stream, physical->actions.size);
         
-        writeActionTable(stream, physical->actions);
+        writeActionTable(stream, &physical->actions);
         
 
-		index++;
-		dev = (Device *)&devices[index];
+		n = n->next;
 	}
     
     sizeTotal = getByteStreamSize(stream);
@@ -106,8 +109,10 @@ void writeGetTableCommand(ByteStream * stream, Device * devices, unsigned int de
 }
 
 
-void readSendCommand(ByteStream * stream, Device * devices)
+void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * output ,List * devices)
 {
+    unsigned int sizeTotal = 0;
+    
     unsigned char deviceName[255];
     unsigned char actionName[255];
     
@@ -116,6 +121,8 @@ void readSendCommand(ByteStream * stream, Device * devices)
     
     Device * device;
     DeviceAction * action;
+    
+    Value v;
     
     memset(deviceName,0, 255);
     memset(actionName,0, 255);
@@ -131,8 +138,15 @@ void readSendCommand(ByteStream * stream, Device * devices)
     actionSize = read4FromByteStream(stream);
     readBufferFromByteStream(stream, actionName, actionSize);
     
-    // 4 value
-    value = (int)read4FromByteStream(stream);
+    if (command==COMMAND_SEND)
+    {
+        // 4 value
+        value = (int)read4FromByteStream(stream);
+        
+        //todo select correct value in Value struct
+        
+        v.integer = value;
+    }
     
 //    printf("Device %s Action %s Value %d\n", deviceName, actionName, value);
     
@@ -140,6 +154,7 @@ void readSendCommand(ByteStream * stream, Device * devices)
     
     if (device == 0)
     {
+        printf("execCommand: device %s not found\n", deviceName);
         return;
     }
     
@@ -147,19 +162,32 @@ void readSendCommand(ByteStream * stream, Device * devices)
     
     if (action==0)
     {
+        printf("execCommand: action %s not found\n", actionName);
         return;
     }
     
     printf("-> execute on %s.%s = %d\n", device->name, action->name, value);
     
-    //todo select correct value in Value struct
+    if (action->action!=0)
+    {
+        action->action(device, &v);
+    }
     
-    Value v;
-    v.integer = value;
-    action->action(device, &v);
-    
-    // todo if read action, send back value of structure
-    
+    if (command==COMMAND_GET)
+    {
+        // 4 magic
+        // 4 size total
+        // 1 command
+        write4ToByteStream(output, PROTOCOL_MAGIC);
+        write4ToByteStream(output, 0);
+        write1ToByteStream(output, COMMAND_GET_TABLE);
+        write4ToByteStream(output, v.integer);
+        
+        sizeTotal = getByteStreamSize(output);
+        
+        sizeTotal = sizeTotal - 8;
+        set4ToBuffer(output->buffer+4, sizeTotal);
+    }
     
 }
 

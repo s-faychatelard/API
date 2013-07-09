@@ -3,7 +3,7 @@
 //  NativeServer
 //
 //  Created by bburles on 05/07/13.
-//  Copyright (c) 2013 Dviance. All rights reserved.
+//  Copyright (c) 2013 Awabot. All rights reserved.
 //
 
 #include <stdio.h>

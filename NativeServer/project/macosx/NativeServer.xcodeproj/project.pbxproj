@@ -14,6 +14,9 @@
 		C52246701786F723003C7F66 /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = C522466F1786F723003C7F66 /* hash.c */; };
 		C52246731786FB4F003C7F66 /* bytestream.c in Sources */ = {isa = PBXBuildFile; fileRef = C52246721786FB4F003C7F66 /* bytestream.c */; };
 		C522467617870008003C7F66 /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = C522467517870008003C7F66 /* protocol.c */; };
+		C522467B178C00A5003C7F66 /* simplexml.c in Sources */ = {isa = PBXBuildFile; fileRef = C522467A178C00A5003C7F66 /* simplexml.c */; };
+		C522467D178C0144003C7F66 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = C522467C178C0144003C7F66 /* file.c */; };
+		C5224682178C105C003C7F66 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = C5224681178C105C003C7F66 /* list.c */; };
 		C55121A51786BDE000DAC8A0 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C55121A41786BDE000DAC8A0 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +43,13 @@
 		C52246721786FB4F003C7F66 /* bytestream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bytestream.c; path = ../../sources/bytestream.c; sourceTree = "<group>"; };
 		C52246741786FDA3003C7F66 /* protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = protocol.h; path = ../../includes/protocol.h; sourceTree = "<group>"; };
 		C522467517870008003C7F66 /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = protocol.c; path = ../../sources/protocol.c; sourceTree = "<group>"; };
+		C5224679178C0099003C7F66 /* simplexml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = simplexml.h; path = ../../includes/simplexml.h; sourceTree = "<group>"; };
+		C522467A178C00A5003C7F66 /* simplexml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = simplexml.c; path = ../../sources/xml/simplexml.c; sourceTree = "<group>"; };
+		C522467C178C0144003C7F66 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = file.c; path = ../../sources/file.c; sourceTree = "<group>"; };
+		C522467F178C0303003C7F66 /* devices.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = devices.xml; path = ../../devices.xml; sourceTree = "<group>"; };
+		C5224680178C1043003C7F66 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = list.h; path = ../../includes/list.h; sourceTree = "<group>"; };
+		C5224681178C105C003C7F66 /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = list.c; path = ../../sources/list.c; sourceTree = "<group>"; };
+		C5224683178C3BC1003C7F66 /* robot-hal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "robot-hal.h"; path = "../../includes/robot-hal.h"; sourceTree = "<group>"; };
 		C55121961786BD9600DAC8A0 /* NativeServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NativeServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55121A41786BDE000DAC8A0 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../sources/main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,11 +83,28 @@
 			name = test;
 			sourceTree = "<group>";
 		};
+		C5224678178C005F003C7F66 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				C522467A178C00A5003C7F66 /* simplexml.c */,
+			);
+			name = xml;
+			sourceTree = "<group>";
+		};
+		C522467E178C02D9003C7F66 /* xml-devices */ = {
+			isa = PBXGroup;
+			children = (
+				C522467F178C0303003C7F66 /* devices.xml */,
+			);
+			name = "xml-devices";
+			sourceTree = "<group>";
+		};
 		C551218D1786BD9600DAC8A0 = {
 			isa = PBXGroup;
 			children = (
 				C52246641786C2FC003C7F66 /* libstdc++.6.dylib */,
 				C52246621786C2E3003C7F66 /* libzmq.a */,
+				C522467E178C02D9003C7F66 /* xml-devices */,
 				C55121A31786BDCE00DAC8A0 /* includes */,
 				C55121A21786BDC300DAC8A0 /* sources */,
 				C55121971786BD9600DAC8A0 /* Products */,
@@ -95,12 +122,15 @@
 		C55121A21786BDC300DAC8A0 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				C5224678178C005F003C7F66 /* xml */,
 				C52246721786FB4F003C7F66 /* bytestream.c */,
 				C52246691786F6E2003C7F66 /* hal */,
 				C55121A41786BDE000DAC8A0 /* main.c */,
 				C522466D1786F706003C7F66 /* devices.c */,
 				C522466F1786F723003C7F66 /* hash.c */,
 				C522467517870008003C7F66 /* protocol.c */,
+				C522467C178C0144003C7F66 /* file.c */,
+				C5224681178C105C003C7F66 /* list.c */,
 			);
 			name = sources;
 			sourceTree = "<group>";
@@ -108,9 +138,12 @@
 		C55121A31786BDCE00DAC8A0 /* includes */ = {
 			isa = PBXGroup;
 			children = (
+				C5224679178C0099003C7F66 /* simplexml.h */,
 				C52246711786FB46003C7F66 /* bytestream.h */,
 				C52246661786EFFD003C7F66 /* devices.h */,
 				C52246741786FDA3003C7F66 /* protocol.h */,
+				C5224680178C1043003C7F66 /* list.h */,
+				C5224683178C3BC1003C7F66 /* robot-hal.h */,
 			);
 			name = includes;
 			sourceTree = "<group>";
@@ -172,6 +205,9 @@
 				C52246701786F723003C7F66 /* hash.c in Sources */,
 				C52246731786FB4F003C7F66 /* bytestream.c in Sources */,
 				C522467617870008003C7F66 /* protocol.c in Sources */,
+				C522467B178C00A5003C7F66 /* simplexml.c in Sources */,
+				C522467D178C0144003C7F66 /* file.c in Sources */,
+				C5224682178C105C003C7F66 /* list.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

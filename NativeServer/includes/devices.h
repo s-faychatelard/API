@@ -3,7 +3,7 @@
 //  NativeServer
 //
 //  Created by bburles on 05/07/13.
-//  Copyright (c) 2013 Dviance. All rights reserved.
+//  Copyright (c) 2013 Awabot. All rights reserved.
 //
 
 #ifndef NativeServer_devices_h
@@ -33,6 +33,13 @@ typedef enum _action_type_
     ACTION_WRITE = 0x02
 } ActionType;
 
+typedef struct _user_action_
+{
+    char *          name;
+    char *          type;
+    ActionCallback  action;
+} UserDeviceAction;
+
 typedef struct _action_
 {
     ActionType      type;
@@ -47,8 +54,7 @@ typedef struct _device_physical_
 {
     char *          type;
     unsigned int    hash;
-    unsigned int    number;
-    DeviceAction * actions;
+    List            actions;
 } DevicePhysical;
 
 
@@ -59,15 +65,21 @@ struct _device_
     DevicePhysical *  device;
 };
 
+extern List userDeviceList;
+
+extern void addUserDeviceAction(ActionCallback callback, char *name, char * type);
+
+extern ActionCallback getUserCallbackByName(char * name, char * type);
+
 extern unsigned int hash32(unsigned char *buf, unsigned int len);
 
-extern Device robotDevices[];
+extern unsigned int initDevicesTable(List * devices);
 
-extern unsigned int initDevicesTable(Device device[]);
+extern unsigned int initDeviceAction(List *actions);
 
-extern unsigned int initDeviceAction(DeviceAction *actions);
+extern DevicePhysical * getDevicePhysicalByName(List * physicals, char * name);
 
-extern Device * getDeviceByName(Device * devices, unsigned char * name, unsigned int nameSize);
+extern Device * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize);
 
 extern DeviceAction * getDeviceActionByName(Device * device, unsigned char * name, unsigned int nameSize);
 
