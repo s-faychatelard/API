@@ -268,7 +268,7 @@ int main(void)
                     
                     execCommand(command, input, output, &deviceList);
                     
-                    zmq_send(zSocket, "WTF?", 4, 0);
+                    zmq_send(zSocket, "Oki", 3, 0);
                     
                     break;
                 case COMMAND_GET:
