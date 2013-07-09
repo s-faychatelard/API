@@ -78,7 +78,7 @@ public abstract class NetworkClient {
 		
 		System.out.println("Write actionName " + actionName.length() + " : " + actionName);
 		
-		/* Specify the size of the data, here Int equal to 4 */
+		/* Specify the size of the data, here Int equal to 4 bytes */
 		writeStream.write32Bits(4);
 		writeStream.write32Bits(value);
 		
@@ -93,6 +93,7 @@ public abstract class NetworkClient {
 		// x octets Device Name
 		// 4 octets Action Name size
 		// x octets Action Name
+		// 4 octets Wanted size
 
 		writeStream.reset();
 		writeHeader(4 + deviceName.length() + 4 + actionName.length() + 4, (byte)0x2);
@@ -105,6 +106,9 @@ public abstract class NetworkClient {
 		writeStream.writeNBytes(actionName.getBytes(), actionName.length());
 		
 		System.out.println("Write actionName " + actionName.length() + " : " + actionName);
+		
+		/* Specify that I want 4 bytes */
+		writeStream.write32Bits(4);
 		
 		writeBuffer();
 		
