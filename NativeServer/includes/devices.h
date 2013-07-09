@@ -18,6 +18,7 @@ typedef enum _value_type_
 
 typedef union _value_
 {
+    int     wantedSize;
     int     integer;
     void *  array;
 } Value;

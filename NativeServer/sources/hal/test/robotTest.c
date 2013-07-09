@@ -21,7 +21,7 @@ void setMotorSpeed(Device * device, Value * value)
 
 void getServoPosition(Device * device, Value * value)
 {
-    printf("getServoPosition for %s\n", device->name);
+    printf("getServoPosition for %s size wanted: %d\n", device->name, value->wantedSize);
     
     value->integer = 12345678;
 }

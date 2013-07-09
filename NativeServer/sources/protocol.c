@@ -126,6 +126,7 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     
     unsigned int deviceSize, actionSize;
     int value;
+    unsigned int valueSize;
     
     Device * device;
     DeviceAction * action;
@@ -146,20 +147,11 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     actionSize = read4FromByteStream(stream);
     readBufferFromByteStream(stream, actionName, actionSize);
     
-    if (command==COMMAND_SEND)
-    {
-        // 4 value
-        value = (int)read4FromByteStream(stream);
-        
-        //todo select correct value in Value struct
-        
-        v.integer = value;
-    }
+    // 4 value size
+    valueSize = read4FromByteStream(stream);
     
-//    printf("Device %s Action %s Value %d\n", deviceName, actionName, value);
     
     device = getDeviceByName(devices, deviceName, deviceSize);
-    
     if (device == 0)
     {
         printf("execCommand: device %s not found\n", deviceName);
@@ -167,14 +159,49 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     }
     
     action = getDeviceActionByName(device,actionName,actionSize);
-    
     if (action==0)
     {
         printf("execCommand: action %s not found\n", actionName);
         return;
     }
     
-    printf("-> execute on %s.%s = %d\n", device->name, action->name, value);
+    if (command==COMMAND_SEND)
+    {
+        // ... value
+        
+        if (valueSize==4)
+        {
+            value = (int)read4FromByteStream(stream);
+        }
+        else
+        {
+            //todo
+//            readBufferFromByteStream(stream, un chtit buffer a malloc, valueSize);
+            value = 0;
+        }
+        
+        //todo set value in Value struct
+        switch (action->valueType)
+        {
+            case VALUE_UNKNONW:
+                v.integer = 0;
+                break;
+            case VALUE_INTEGER:
+                v.integer = value;
+                break;
+            case VALUE_ARRAY:
+                v.array = 0;
+                break;
+        }
+        
+    }
+    else if (command==COMMAND_GET)
+    {
+        // it's a read order, we write the wanted size
+        v.wantedSize = valueSize;
+    }
+    
+    printf("-> execute on %s.%s = %d\n", device->name, action->name, v.integer);
     
     if (action->action!=0)
     {
