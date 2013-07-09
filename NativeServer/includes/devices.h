@@ -65,11 +65,6 @@ struct _device_
     DevicePhysical *  device;
 };
 
-extern List userDeviceList;
-
-extern void addUserDeviceAction(ActionCallback callback, char *name, char * type);
-
-extern ActionCallback getUserCallbackByName(char * name, char * type);
 
 extern unsigned int hash32(unsigned char *buf, unsigned int len);
 

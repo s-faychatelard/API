@@ -189,12 +189,14 @@ void initXml(void)
     
     xmlBuffer = fileRead(DEVICE_XML, &xmlSize);
     
-    printf("xml size: %d\n", xmlSize);
+    printf("initialize xml (%d)\n", xmlSize);
     
     parser = simpleXmlCreateParser((char *)xmlBuffer, xmlSize);
     
     simpleXmlParse(parser, xmlHandler);
+ 
     
+    free(xmlBuffer);
 }
 
 int main(void)
@@ -217,9 +219,7 @@ int main(void)
     output = newByteStream(outputBuffer);
     input = newByteStream(inputBuffer);
     
-    listInit(&userDeviceList);
-    
-    initUserCallback();
+    initRobotHal();
     
     initXml();
    

@@ -14,9 +14,24 @@
 #include "../includes/devices.h"
 #include "../includes/protocol.h"
 
+//----------------------------- private functions
 
+static void writeProtocolHeader(ByteStream * stream, NetworkCommand command)
+{
+    write4ToByteStream(stream, PROTOCOL_MAGIC);
+    write4ToByteStream(stream, 0);
+    write1ToByteStream(stream, command);
+}
 
-void writeActionTable(ByteStream * stream, List * actions)
+static void writeProtocolHeaderSize(ByteStream * stream)
+{
+    unsigned int sizeTotal = getByteStreamSize(stream);
+    
+    sizeTotal = sizeTotal - 8;
+    set4ToBuffer(stream->buffer+4, sizeTotal);
+}
+
+static void writeActionTable(ByteStream * stream, List * actions)
 {
     DeviceAction *	ptr;
     unsigned int size;
@@ -44,10 +59,10 @@ void writeActionTable(ByteStream * stream, List * actions)
     
 }
 
+//----------------------------- public functions
+
 void writeGetTableCommand(ByteStream * stream, List * devices)
 {
-    unsigned int sizeTotal = 0;
-    
     unsigned int nameSize;
     
     Device *	dev;
@@ -57,9 +72,7 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
     // 4 size total
     // 1 command
     // 4 device number
-    write4ToByteStream(stream, PROTOCOL_MAGIC);
-    write4ToByteStream(stream, 0);
-    write1ToByteStream(stream, COMMAND_GET_TABLE);
+    writeProtocolHeader(stream,COMMAND_GET_TABLE);
     write4ToByteStream(stream, devices->size);
     
     // payload :
@@ -98,10 +111,7 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
 		n = n->next;
 	}
     
-    sizeTotal = getByteStreamSize(stream);
-    
-    sizeTotal = sizeTotal - 8;
-    set4ToBuffer(stream->buffer+4, sizeTotal);
+    writeProtocolHeaderSize(stream);
     
 //    printf("writeGetTableCommand: sizeTotal %d\n", sizeTotal);
     
@@ -111,8 +121,6 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
 
 void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * output ,List * devices)
 {
-    unsigned int sizeTotal = 0;
-    
     unsigned char deviceName[255];
     unsigned char actionName[255];
     
@@ -175,18 +183,16 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     
     if (command==COMMAND_GET)
     {
+        // it's a read order, send back value
+        
         // 4 magic
         // 4 size total
         // 1 command
-        write4ToByteStream(output, PROTOCOL_MAGIC);
-        write4ToByteStream(output, 0);
-        write1ToByteStream(output, COMMAND_GET_TABLE);
+        // 4 value
+        writeProtocolHeader(output, COMMAND_SEND);
         write4ToByteStream(output, v.integer);
         
-        sizeTotal = getByteStreamSize(output);
-        
-        sizeTotal = sizeTotal - 8;
-        set4ToBuffer(output->buffer+4, sizeTotal);
+        writeProtocolHeaderSize(output);
     }
     
 }

@@ -10,6 +10,12 @@
 #define NativeServer_hal_h
 
 
+extern void addUserDeviceAction(ActionCallback callback, char *name, char * type);
+
+extern ActionCallback getUserCallbackByName(char * name, char * type);
+
+extern void initRobotHal(void);
+
 extern void initUserCallback(void);
 
 

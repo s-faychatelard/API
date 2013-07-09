@@ -10,6 +10,7 @@
 
 #include "../../../includes/list.h"
 #include "../../../includes/devices.h"
+#include "../../../includes/robot-hal.h"
 
 
 void setMotorSpeed(Device * device, Value * value)

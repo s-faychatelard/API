@@ -1,4 +1,4 @@
-<?XML version="1.0"?>
+<?xml version="1.0"?>
 
 <robot name="JE V-O-O-O-TE T-A-U-P-E">
     
@@ -13,6 +13,6 @@
     <device name="leftWheel" type="devices.Motor"/>
     <device name="rightWheel" type="devices.Motor"/>
     
-    <device name="servo" type="devices.Servo"/>
+    <device name="rantanplan" type="devices.Servo"/>
 
 </robot>
