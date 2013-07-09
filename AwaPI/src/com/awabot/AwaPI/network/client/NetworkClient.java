@@ -58,11 +58,12 @@ public abstract class NetworkClient {
 	}
 	
 	public void writeInt(String deviceName, String actionName, Integer value) {
-		// Command Write Int
+		// Command Write
 		// 4 octets Device Name size
 		// x octets Device Name
 		// 4 octets Action Name size
 		// x octets Action Name
+		// 4 octets Value Size
 		// 4 octets Value
 
 		writeStream.reset();
@@ -77,6 +78,8 @@ public abstract class NetworkClient {
 		
 		System.out.println("Write actionName " + actionName.length() + " : " + actionName);
 		
+		/* Specify the size of the data, here Int equal to 4 */
+		writeStream.write32Bits(4);
 		writeStream.write32Bits(value);
 		
 		System.out.println("Write value : " + value);
