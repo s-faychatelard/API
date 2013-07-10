@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		try {
 			
-			//if (!AwaPI.init("tcp://192.168.11.144:8687", "/Users/sylvain/Documents/Git/API/AwaPI/components.xml"))
-			if (!AwaPI.init("tcp://127.0.0.1:8687", "/Users/sylvain/Documents/Git/API/AwaPI/components.xml")) {
+			if (!AwaPI.init("tcp://192.168.11.144:8687", "/Users/sylvain/Documents/Git/API/AwaPI/components.xml")) {
+			//if (!AwaPI.init("tcp://127.0.0.1:8687", "/Users/sylvain/Documents/Git/API/AwaPI/components.xml")) {
 				AwaPI.shutdown();
 				return;
 			}
