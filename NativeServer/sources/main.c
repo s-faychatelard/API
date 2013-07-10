@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Awabot. All rights reserved.
 //
 
+#include "../includes/nativeserver.h"
+
 #define DEVICE_XML  "../../../../../../../devices.xml"
 
-extern int startNativeServer(const char * xmlDevicesFile);
+
 
 int main(void)
 {

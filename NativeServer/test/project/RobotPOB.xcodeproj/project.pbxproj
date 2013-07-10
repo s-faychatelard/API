@@ -1,0 +1,248 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C5F772BB178D614E003AB351 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C5F772BA178D614E003AB351 /* main.c */; };
+		C5F772BE178D6365003AB351 /* libnativeserverlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F772BD178D6365003AB351 /* libnativeserverlib.a */; };
+		C5F772C0178D6371003AB351 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F772BF178D6371003AB351 /* libstdc++.6.dylib */; };
+		C5F772C2178D6390003AB351 /* pob-hal.c in Sources */ = {isa = PBXBuildFile; fileRef = C5F772C1178D6390003AB351 /* pob-hal.c */; };
+		C5F772C5178D681B003AB351 /* libbiglibpob-macosx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F772C4178D681B003AB351 /* libbiglibpob-macosx.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C5F772AB178D610E003AB351 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C5F772AD178D610E003AB351 /* RobotPOB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RobotPOB; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F772BA178D614E003AB351 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../sources/main.c; sourceTree = "<group>"; };
+		C5F772BC178D61AE003AB351 /* pob-devices.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "pob-devices.xml"; path = "../sources/pob-devices.xml"; sourceTree = "<group>"; };
+		C5F772BD178D6365003AB351 /* libnativeserverlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnativeserverlib.a; path = ../../project/macosx/DerivedData/NativeServer/Build/Products/Release/libnativeserverlib.a; sourceTree = "<group>"; };
+		C5F772BF178D6371003AB351 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		C5F772C1178D6390003AB351 /* pob-hal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "pob-hal.c"; path = "../sources/pob-hal.c"; sourceTree = "<group>"; };
+		C5F772C4178D681B003AB351 /* libbiglibpob-macosx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbiglibpob-macosx.a"; path = "../../../../../biglibpobworks/biglibpob/project/macosx/DerivedData/biglibpob-macosx/Build/Products/Release/libbiglibpob-macosx.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C5F772AA178D610E003AB351 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F772C5178D681B003AB351 /* libbiglibpob-macosx.a in Frameworks */,
+				C5F772C0178D6371003AB351 /* libstdc++.6.dylib in Frameworks */,
+				C5F772BE178D6365003AB351 /* libnativeserverlib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C5F772A4178D610E003AB351 = {
+			isa = PBXGroup;
+			children = (
+				C5F772C4178D681B003AB351 /* libbiglibpob-macosx.a */,
+				C5F772BF178D6371003AB351 /* libstdc++.6.dylib */,
+				C5F772BD178D6365003AB351 /* libnativeserverlib.a */,
+				C5F772B9178D613E003AB351 /* sources */,
+				C5F772AE178D610E003AB351 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C5F772AE178D610E003AB351 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5F772AD178D610E003AB351 /* RobotPOB */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5F772B9178D613E003AB351 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				C5F772BA178D614E003AB351 /* main.c */,
+				C5F772BC178D61AE003AB351 /* pob-devices.xml */,
+				C5F772C1178D6390003AB351 /* pob-hal.c */,
+			);
+			name = sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C5F772AC178D610E003AB351 /* RobotPOB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5F772B6178D610E003AB351 /* Build configuration list for PBXNativeTarget "RobotPOB" */;
+			buildPhases = (
+				C5F772A9178D610E003AB351 /* Sources */,
+				C5F772AA178D610E003AB351 /* Frameworks */,
+				C5F772AB178D610E003AB351 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RobotPOB;
+			productName = RobotPOB;
+			productReference = C5F772AD178D610E003AB351 /* RobotPOB */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C5F772A5178D610E003AB351 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Awabot;
+			};
+			buildConfigurationList = C5F772A8178D610E003AB351 /* Build configuration list for PBXProject "RobotPOB" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C5F772A4178D610E003AB351;
+			productRefGroup = C5F772AE178D610E003AB351 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C5F772AC178D610E003AB351 /* RobotPOB */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C5F772A9178D610E003AB351 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5F772BB178D614E003AB351 /* main.c in Sources */,
+				C5F772C2178D6390003AB351 /* pob-hal.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C5F772B4178D610E003AB351 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C5F772B5178D610E003AB351 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C5F772B7178D610E003AB351 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../../../biglibpobworks/biglibpob/include\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../project/macosx/DerivedData/NativeServer/Build/Products/Release\"",
+					"\"$(SRCROOT)/../../../../../biglibpobworks/biglibpob/project/macosx/DerivedData/biglibpob-macosx/Build/Products/Release\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C5F772B8178D610E003AB351 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../../../biglibpobworks/biglibpob/include\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../project/macosx/DerivedData/NativeServer/Build/Products/Release\"",
+					"\"$(SRCROOT)/../../../../../biglibpobworks/biglibpob/project/macosx/DerivedData/biglibpob-macosx/Build/Products/Release\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C5F772A8178D610E003AB351 /* Build configuration list for PBXProject "RobotPOB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5F772B4178D610E003AB351 /* Debug */,
+				C5F772B5178D610E003AB351 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C5F772B6178D610E003AB351 /* Build configuration list for PBXNativeTarget "RobotPOB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5F772B7178D610E003AB351 /* Debug */,
+				C5F772B8178D610E003AB351 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C5F772A5178D610E003AB351 /* Project object */;
+}

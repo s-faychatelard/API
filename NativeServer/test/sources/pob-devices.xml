@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<robot name="POB">
+    
+    <physical name="devices.Motor">
+        <action name="setSpeed" type="int" action="write" />
+    </physical>
+    
+    <physical name="devices.Servo">
+        <action name="setPosition" type="int" action="write" />
+    </physical>
+    
+    <physical name="devices.DistanceSensor">
+        <action name="getDistance" type="int" action="read" />
+    </physical>
+    
+    <device name="leftWheel" type="devices.Motor"/>
+    <device name="rightWheel" type="devices.Motor"/>
+    <device name="servo" type="devices.Servo"/>
+    <device name="distance" type="devices.DistanceSensor"/>
+    
+</robot>
