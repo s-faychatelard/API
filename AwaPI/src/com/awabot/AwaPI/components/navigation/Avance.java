@@ -9,12 +9,12 @@ public class Avance extends Component {
 		super(name);
 	}
 
-	public void start(Integer speed) throws InterruptedException {
+	public void start(Integer speed) {
 		AwaPI.getComponentById(alias("leftWheel")).exec("setSpeed", speed);
 		AwaPI.getComponentById(alias("rightWheel")).exec("setSpeed", speed);
 	}
 	
-	public void stop() throws InterruptedException {
+	public void stop() {
 		AwaPI.getComponentById(alias("leftWheel")).exec("setSpeed", 0);
 		AwaPI.getComponentById(alias("rightWheel")).exec("setSpeed", 0);
 	}
