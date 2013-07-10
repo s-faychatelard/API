@@ -5,9 +5,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import com.awabot.AwaPI.generic.Device;
+import com.awabot.AwaPI.generic.GlobalFactory;
 import com.awabot.AwaPI.generic.Device.Action;
 import com.awabot.AwaPI.generic.Device.Value;
-import com.awabot.AwaPI.generic.GlobalFactory;
 
 public abstract class NetworkClient {
 
