@@ -15,7 +15,12 @@ public class AwaPI {
 		NetworkClient.getInstance().init();
 		
 		/* For testing */
-		XmlParser.parseXmlFile("/Users/sylvain/Documents/Git/API/AwaPI/components.xml");
+		try {
+			XmlParser.parseXmlFile("/Users/sylvain/Documents/Git/API/AwaPI/components.xml");
+		} catch(IllegalStateException e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
 		
 		/*GlobalFactory.addComponent("avance", "components.navigation.Avance", true);
 		GlobalFactory.addComponent("tourne", "components.navigation.Tourne", true);

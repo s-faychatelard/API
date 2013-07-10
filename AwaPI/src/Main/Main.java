@@ -6,7 +6,8 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		try {
-			AwaPI.init();
+			if (!AwaPI.init())
+				return;
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			AwaPI.shutdown();

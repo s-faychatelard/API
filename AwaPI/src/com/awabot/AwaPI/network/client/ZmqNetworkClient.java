@@ -19,8 +19,8 @@ public class ZmqNetworkClient extends NetworkClient {
 	public boolean open()
 	{
 		zSocket = zContext.createSocket(ZMQ.REQ);
-		zSocket.connect("tcp://192.168.11.144:8687");
-		//zSocket.connect("tcp://127.0.0.1:8687");
+		//zSocket.connect("tcp://192.168.11.144:8687");
+		zSocket.connect("tcp://127.0.0.1:8687");
 		
 		return true;
 	}

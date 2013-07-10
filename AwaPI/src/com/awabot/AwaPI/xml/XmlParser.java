@@ -28,6 +28,11 @@ public class XmlParser {
 	</robot>
 
 	*/
+	
+	// TODO Add required
+	
+	private final static String API_PREFIX = "com.awabot.AwaPI.";
+	
 	public static void parseXmlFile(String filename) {
 		
 		try {
@@ -60,10 +65,26 @@ public class XmlParser {
 						if (n.hasAttributes()) {
 						
 							Element e = (Element)n;
-							component.addAlias(e.getAttribute("name"), e.getAttribute("alias"));
 							
-							System.out.println(e.getAttribute("name"));
-							System.out.println(e.getAttribute("alias"));
+							if (e.getNodeName().compareTo("device") == 0) {
+								
+								component.addAlias(e.getAttribute("name"), e.getAttribute("alias"));
+								
+								System.out.println(e.getAttribute("name"));
+								System.out.println(e.getAttribute("alias"));
+								
+							}
+							else if (e.getNodeName().compareTo("required") == 0) {
+								
+								try {
+									Class.forName( ((Boolean.parseBoolean(e.getAttribute("standard"))) ? API_PREFIX : "") + e.getAttribute("name"));
+									
+									System.out.println("Required " + e.getAttribute("name"));
+									
+								} catch (ClassNotFoundException e1) {
+									throw new IllegalStateException("The component " + el.getAttribute("name") + " required a " + e.getAttribute("name"));
+								}
+							}
 						}
 					}
 				}
