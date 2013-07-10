@@ -66,6 +66,7 @@
 		C5224686178C4D1C003C7F66 /* robot-hal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "robot-hal.c"; path = "../../sources/hal/robot-hal.c"; sourceTree = "<group>"; };
 		C55121961786BD9600DAC8A0 /* NativeServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NativeServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55121A41786BDE000DAC8A0 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../sources/main.c; sourceTree = "<group>"; };
+		C5F772A3178D58B3003AB351 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../../includes/utils.h; sourceTree = "<group>"; };
 		E44722FE178D54C1002DCE5A /* libnativeserverlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnativeserverlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4472310178D5509002DCE5A /* mainlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mainlib.c; path = ../../sources/mainlib.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +197,7 @@
 			children = (
 				C52246711786FB46003C7F66 /* bytestream.h */,
 				C5224680178C1043003C7F66 /* list.h */,
+				C5F772A3178D58B3003AB351 /* utils.h */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -482,6 +484,7 @@
 				E4472300178D54C1002DCE5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

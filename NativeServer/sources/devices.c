@@ -12,7 +12,7 @@
 
 #include "../includes/list.h"
 #include "../includes/devices.h"
-
+#include "../includes/utils.h"
 
 unsigned int initDeviceAction(List *actions)
 {
@@ -42,26 +42,26 @@ unsigned int initDeviceAction(List *actions)
 
 unsigned int initDevicesTable(List * devices)
 {
-    Device *	ptr;
-    DevicePhysical * physical;
+    DeviceObject *	ptr;
+    DeviceHardware * hw;
 	unsigned int index = 0;
     unsigned int size;
     
     ListNode *n = devices->first;
     while (n != NULL)
     {
-        ptr = (Device *)n->data;
+        ptr = (DeviceObject *)n->data;
         ptr->hash = hash32((unsigned char *)ptr->name, (unsigned int)strlen(ptr->name));
 		
-        physical = ptr->device;
-        if (physical->hash==0)
+        hw = ptr->hardware;
+        if (hw->hash==0)
         {
-            physical->hash = hash32((unsigned char *)physical->type, (unsigned int)strlen(physical->type));
+            hw->hash = hash32((unsigned char *)hw->type, (unsigned int)strlen(hw->type));
         }
         
-        printf("Device %s: 0x%x, type %s\n", ptr->name, ptr->hash, physical->type);
+        printf("Device %s: 0x%x, type %s\n", ptr->name, ptr->hash, hw->type);
         
-        size = initDeviceAction(&physical->actions);
+        size = initDeviceAction(&hw->actions);
         
         printf("Size of action: %d\n", size);
         
@@ -74,14 +74,14 @@ unsigned int initDevicesTable(List * devices)
 }
 
 
-Device * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize)
+DeviceObject * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize)
 {
-    Device *	ptr;
+    DeviceObject *	ptr;
     
     ListNode *n = devices->first;
     while (n != NULL)
     {
-        ptr = (Device *)n->data;
+        ptr = (DeviceObject *)n->data;
         
         if (strncmp(ptr->name, (const char *)name, nameSize)==0)
         {
@@ -94,13 +94,13 @@ Device * getDeviceByName(List * devices, unsigned char * name, unsigned int name
     return 0;
 }
 
-DevicePhysical * getDevicePhysicalByName(List * physicals, const char * name)
+DeviceHardware * getDevicePhysicalByName(List * physicals, const char * name)
 {
-    DevicePhysical * ptr;
+    DeviceHardware * ptr;
     ListNode *n = physicals->first;
     while (n != NULL)
     {
-        ptr = (DevicePhysical *)n->data;
+        ptr = (DeviceHardware *)n->data;
     
         if (strcmp(name,ptr->type)==0)
         {
@@ -113,10 +113,10 @@ DevicePhysical * getDevicePhysicalByName(List * physicals, const char * name)
     return 0;
 }
 
-DeviceAction * getDeviceActionByName(Device * device, unsigned char * name, unsigned int nameSize)
+DeviceAction * getDeviceActionByName(DeviceObject * device, unsigned char * name, unsigned int nameSize)
 {
-    DevicePhysical * physical = device->device;
-    List * actions = &physical->actions;
+    DeviceHardware * hw = device->hardware;
+    List * actions = &hw->actions;
     DeviceAction *	ptr;
     
     ListNode *n = actions->first;

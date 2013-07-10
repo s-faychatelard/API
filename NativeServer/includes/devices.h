@@ -16,67 +16,73 @@ typedef enum _value_type_
     VALUE_ARRAY = 0x02
 } ValueType;
 
+typedef struct _value_array_
+{
+    unsigned int len;
+    unsigned char * buffer;
+} ArrayValue;
+
 typedef union _value_
 {
-    int     wantedSize;
-    int     integer;
-    void *  array;
+    int             wantedSize; /**< size we want when we read a value */
+    int             integer;    /**< an integer value */
+    ArrayValue *    array;      /**< a pointer to an array */
+    void *          unknown;    /**< a generic pointer for whatever we have */
 } Value;
 
-typedef struct _device_ Device;
+typedef struct _device_object_ DeviceObject;
 
-typedef void (*ActionCallback)(Device * device, Value * value);
+typedef void (*ActionCallback)(DeviceObject * device, Value * value);
 
 typedef enum _action_type_
 {
-    ACTION_UNKNONW = 0x00,
-    ACTION_READ = 0x01,
-    ACTION_WRITE = 0x02
+    ACTION_UNKNONW  = 0x00,
+    ACTION_READ     = 0x01,
+    ACTION_WRITE    = 0x02
 } ActionType;
 
 typedef struct _user_action_
 {
-    char *          name;
-    char *          type;
-    ActionCallback  action;
+    char *          name;   /**< name of action (must be the same as the Java method) */
+    char *          type;   /**< type of devices ("devices.Motor" for example) */
+    ActionCallback  action; /**< user callback */
 } UserDeviceAction;
 
 typedef struct _action_
 {
-    ActionType      type;
-    ValueType       valueType;
-    char *          name;
-    unsigned int    hash;
-    ActionCallback  action;
+    ActionType      type;       /**< type of this action (read or write) */
+    ValueType       valueType;  /**< type of value (integer, array of bytes, float...) */
+    char *          name;       /**< name of this action */
+    unsigned int    hash;       /**< internal hash of name */
+    ActionCallback  action;     /**< user callback */
 } DeviceAction;
 
 
-typedef struct _device_physical_
+typedef struct _device_hardware_
 {
-    char *          type;
-    unsigned int    hash;
-    List            actions;
-} DevicePhysical;
+    char *          type;       /**< type of this devices ("devices.Motor" for example) */
+    unsigned int    hash;       /**< internal hash of type */
+    List            actions;    /**< list of actions for this device */
+} DeviceHardware;
 
 
-struct _device_
+struct _device_object_
 {
-    char *          name;
-    unsigned int    hash;
-    DevicePhysical *  device;
+    char *          name;       /**< identifier for this device ("myNuclearProvidedMotor" for example) */
+    unsigned int    hash;       /**< internal hash of name */
+    DeviceHardware *  hardware; /**< hardware device */
 };
 
 
-extern unsigned int hash32(unsigned char *buf, unsigned int len);
 
 extern unsigned int initDevicesTable(List * devices);
 
 extern unsigned int initDeviceAction(List *actions);
 
-extern DevicePhysical * getDevicePhysicalByName(List * physicals, const char * name);
+extern DeviceHardware * getDevicePhysicalByName(List * physicals, const char * name);
 
-extern Device * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize);
+extern DeviceObject * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize);
 
-extern DeviceAction * getDeviceActionByName(Device * device, unsigned char * name, unsigned int nameSize);
+extern DeviceAction * getDeviceActionByName(DeviceObject * device, unsigned char * name, unsigned int nameSize);
 
 #endif

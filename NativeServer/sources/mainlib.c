@@ -18,28 +18,30 @@
 #include "../includes/protocol.h"
 #include "../includes/simplexml.h"
 #include "../includes/robot-hal.h"
+#include "../includes/utils.h"
 
-
-#define DEVICE_XML  "../../../../../../../devices.xml"
 
 #define DEVICE      "device"
 #define PHYSICAL    "physical"
 #define ACTION      "action"
 
-extern unsigned char *fileRead(char *filename, unsigned int *len );
+
+
+//----------------------------- private objects
 
 static void * zContext;
 static void * zSocket;
 
-static List physicalList;
+static List hardwareList;
 static List deviceList;
 
 static DeviceAction * currentAction;
-static DevicePhysical * currentPhysical;
-static Device * currentDevice;
+static DeviceHardware * currentHw;
+static DeviceObject * currentDevice;
 
+//----------------------------- private functions
 
-void initServer(void)
+static void initServer(void)
 {
     zContext = zmq_ctx_new();
     zSocket = zmq_socket(zContext, ZMQ_REP);
@@ -53,14 +55,13 @@ void initServer(void)
     
 }
 
-
-void shutdownServer(void)
+static void shutdownServer(void)
 {
     zmq_close(zSocket);
     zmq_ctx_destroy(zContext);
 }
 
-void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
+static void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
                   const char* szName, const char* szAttribute,
                   const char* szValue)
 {
@@ -71,15 +72,15 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
         
         if (strcmp(DEVICE, szName)==0)
         {
-            currentDevice = (Device *)malloc(sizeof(Device));
+            currentDevice = (DeviceObject *)malloc(sizeof(DeviceObject));
             currentDevice->hash = 0;
             
         }
         else if (strcmp(PHYSICAL, szName)==0)
         {
-            currentPhysical = (DevicePhysical *)malloc(sizeof(DevicePhysical));
-            currentPhysical->hash = 0;
-            listInit(&currentPhysical->actions);
+            currentHw = (DeviceHardware *)malloc(sizeof(DeviceHardware));
+            currentHw->hash = 0;
+            listInit(&currentHw->actions);
         }
         else if (strcmp(ACTION, szName)==0)
         {
@@ -101,8 +102,8 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
             else if (strcmp("type", szAttribute)==0)
             {
                 // get physical device
-                currentDevice->device = getDevicePhysicalByName(&physicalList, szValue);
-                if (currentDevice->device==0)
+                currentDevice->hardware = getDevicePhysicalByName(&hardwareList, szValue);
+                if (currentDevice->hardware==0)
                 {
                     printf("XML ERROR CANT FOUND PHYSICAL DEVICE %s !\n", szValue);
                 }
@@ -112,8 +113,8 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
         {
             if (strcmp("name", szAttribute)==0)
             {
-                currentPhysical->type = malloc(strlen(szValue));
-                strcpy(currentPhysical->type, szValue);
+                currentHw->type = malloc(strlen(szValue));
+                strcpy(currentHw->type, szValue);
             }
         }
         else if (strcmp(ACTION, szName)==0)
@@ -123,7 +124,7 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
                 currentAction->name = malloc(strlen(szValue));
                 strcpy(currentAction->name, szValue);
                 
-                currentAction->action = getUserCallbackByName(currentAction->name,currentPhysical->type);
+                currentAction->action = getUserCallbackByName(currentAction->name,currentHw->type);
                 
             }
             else if (strcmp("type", szAttribute)==0)
@@ -160,7 +161,7 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
         
         if (strcmp(PHYSICAL, szName)==0)
         {
-            listAddElement(&physicalList, currentPhysical);
+            listAddElement(&hardwareList, currentHw);
         }
     }
     else if (event == FINISH_TAG)
@@ -173,7 +174,7 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
         }
         else if (strcmp(ACTION, szName)==0)
         {
-            listAddElement(&currentPhysical->actions, currentAction);
+            listAddElement(&currentHw->actions, currentAction);
         }
     }
     
@@ -182,16 +183,16 @@ void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
     return xmlHandler;
 }
 
-void initXml(void)
+static void initXml(const char * xmlDevicesFile)
 {
     unsigned char * xmlBuffer;
     unsigned int xmlSize;
     SimpleXmlParser parser;
     
-    listInit(&physicalList);
+    listInit(&hardwareList);
     listInit(&deviceList);
     
-    xmlBuffer = fileRead(DEVICE_XML, &xmlSize);
+    xmlBuffer = fileRead((char *)xmlDevicesFile, &xmlSize);
     
     printf("initialize xml (%d)\n", xmlSize);
     
@@ -203,7 +204,9 @@ void initXml(void)
     free(xmlBuffer);
 }
 
-int startNativeServer(void)
+//----------------------------- public functions
+
+int startNativeServer(const char * xmlDevicesFile)
 {
     NetworkCommand command;
     int result;
@@ -225,7 +228,7 @@ int startNativeServer(void)
     
     initRobotHal();
     
-    initXml();
+    initXml(xmlDevicesFile);
     
     initDevicesTable(&deviceList);
     

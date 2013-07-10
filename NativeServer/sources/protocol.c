@@ -65,8 +65,8 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
 {
     unsigned int nameSize;
     
-    Device *	dev;
-    DevicePhysical * physical;
+    DeviceObject *	dev;
+    DeviceHardware * hw;
     
     // 4 magic
     // 4 size total
@@ -79,7 +79,7 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
     ListNode *n = devices->first;
     while (n != NULL)
     {
-        dev = (Device *)n->data;
+        dev = (DeviceObject *)n->data;
         
         // get table
         // 4 size
@@ -90,22 +90,20 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
         write4ToByteStream(stream, nameSize);
         writeBufferToByteStream(stream, (unsigned char *)dev->name, nameSize);
         
-        physical = dev->device;
+        hw = dev->hardware;
         
         // 4 size
         // ... type
         
-        nameSize = (unsigned int)strlen(physical->type);
+        nameSize = (unsigned int)strlen(hw->type);
         
         write4ToByteStream(stream, nameSize);
-        writeBufferToByteStream(stream, (unsigned char *)physical->type, nameSize);
-        
-        physical = dev->device;
+        writeBufferToByteStream(stream, (unsigned char *)hw->type, nameSize);
         
         // 4 action number
-        write4ToByteStream(stream, physical->actions.size);
+        write4ToByteStream(stream, hw->actions.size);
         
-        writeActionTable(stream, &physical->actions);
+        writeActionTable(stream, &hw->actions);
         
 
 		n = n->next;
@@ -128,7 +126,7 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     int value;
     unsigned int valueSize;
     
-    Device * device;
+    DeviceObject * device;
     DeviceAction * action;
     
     Value v;

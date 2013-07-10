@@ -13,13 +13,13 @@
 #include "../../../includes/robot-hal.h"
 
 
-void setMotorSpeed(Device * device, Value * value)
+void setMotorSpeed(DeviceObject * device, Value * value)
 {
     printf("setSpeed value to write: %d (0x%x) to %s\n", value->integer, value->integer, device->name);
 }
 
 
-void getServoPosition(Device * device, Value * value)
+void getServoPosition(DeviceObject * device, Value * value)
 {
     printf("getServoPosition for %s size wanted: %d\n", device->name, value->wantedSize);
     
