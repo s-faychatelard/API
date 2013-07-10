@@ -20,18 +20,20 @@ public class XmlParser {
 	
 	/*
 
-	<root>
+	<?xml version="1.0"?>
 	<robot name="POB">
-		<component name="avance" type="components.navigation.Avance">
-			<device alias="leftWheel" name="toto"/>
-		</component>
+	    <component name="avance" type="components.navigation.Avance" standard="true"/>
+	    <component name="tourne" type="components.navigation.Tourne" standard="true"/>
+	    <component name="avanceTourne" type="components.navigation.AvanceTourne" standard="true">
+	        <required name="components.navigation.Avance" standard="true"/>
+	    </component>
+	    <component name="head" type="components.head.HeadVision" standard="true">
+	        <device name="servo" alias="rantanplan"/>
+	    </component>
 	</robot>
 
+
 	*/
-	
-	// TODO Add required
-	
-	private final static String API_PREFIX = "com.awabot.AwaPI.";
 	
 	public static void parseXmlFile(String filename) {
 		
@@ -77,7 +79,7 @@ public class XmlParser {
 							else if (e.getNodeName().compareTo("required") == 0) {
 								
 								try {
-									Class.forName( ((Boolean.parseBoolean(e.getAttribute("standard"))) ? API_PREFIX : "") + e.getAttribute("name"));
+									Class.forName( ((Boolean.parseBoolean(e.getAttribute("standard"))) ? GlobalFactory.API_PREFIX : "") + e.getAttribute("name"));
 									
 									System.out.println("Required " + e.getAttribute("name"));
 									

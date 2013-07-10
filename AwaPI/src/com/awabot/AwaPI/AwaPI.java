@@ -10,13 +10,14 @@ import com.awabot.AwaPI.xml.XmlParser;
 
 public class AwaPI {
 	
-	public static boolean init() {
+	public static boolean init(String serverAddress, String componentsPath) {
 		NetworkClient.createInstance(ZmqNetworkClient.class);
-		NetworkClient.getInstance().init();
+	
+		NetworkClient.getInstance().init(serverAddress);
 		
 		/* For testing */
 		try {
-			XmlParser.parseXmlFile("/Users/sylvain/Documents/Git/API/AwaPI/components.xml");
+			XmlParser.parseXmlFile(componentsPath);
 		} catch(IllegalStateException e) {
 			System.err.println(e.getMessage());
 			return false;

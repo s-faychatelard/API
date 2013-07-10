@@ -42,16 +42,16 @@ public abstract class NetworkClient {
 		return networkInstance;
 	}
 	
-	public abstract boolean open();
+	public abstract boolean open(String address);
 	
 	public abstract void close();
 	
 	public abstract void writeBuffer();
 	
 	
-	public void init() {
-		
-		open();
+	public void init(String address) {
+
+		open(address);
 		writeHeader(1, (byte)0x0);
 		writeBuffer();
 		this.readTable();

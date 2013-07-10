@@ -16,11 +16,10 @@ public class ZmqNetworkClient extends NetworkClient {
 		zContext = new ZContext();
 	}
 	
-	public boolean open()
+	public boolean open(String address)
 	{
 		zSocket = zContext.createSocket(ZMQ.REQ);
-		//zSocket.connect("tcp://192.168.11.144:8687");
-		zSocket.connect("tcp://127.0.0.1:8687");
+		zSocket.connect(address);
 		
 		return true;
 	}
