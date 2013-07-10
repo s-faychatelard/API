@@ -18,9 +18,7 @@ short motorRight = 0;
 int servomotor = 0;
 
 void setMotorSpeed(DeviceObject * device, Value * value)
-{
-//    printf("setSpeed value to write: %d (0x%x) to %s\n", value->integer, value->integer, device->name);
-    
+{    
     if (strcmp("leftWheel", device->name)==0)
     {
         motorLeft = (short)value->integer;
@@ -29,8 +27,6 @@ void setMotorSpeed(DeviceObject * device, Value * value)
     {
         motorRight = (short)value->integer;
     }
-    
-//    printf("l %d r %d s %d\n", motorLeft, motorRight, servomotor);
     
     RProtocolSendJoypad(protocol, motorLeft, motorRight, servomotor, 0, 0, 0, 0, 0);
     Wait(10);
@@ -86,10 +82,6 @@ void getDistanceSensor(DeviceObject * device, Value * value)
     RProtocolGetRealTimeData(protocol, &realtime);
     Wait(10);
     
-//    value->integer = realtime.analogChannel[0];
-    
-//    printf("getDistanceSensor %d\n", realtime.analogChannel[0]);
-    
     value->integer = GetDistanceFromGP2D12AnalogValue((realtime.analogChannel[0]<<2));
 }
 
@@ -98,8 +90,7 @@ void initUserCallback(void)
     addUserDeviceAction(setMotorSpeed, "setSpeed", "devices.Motor");
     addUserDeviceAction(setServoPosition, "setPosition", "devices.Servo");
     addUserDeviceAction(getDistanceSensor, "getDistance", "devices.DistanceSensor");
-    
-    
+
     protocol = RProtocolNew(False);
     
     if( protocol->detect(protocol)==False)
@@ -117,73 +108,4 @@ void initUserCallback(void)
     }
     
     RProtocolOpen(protocol);
-    
- /*   Value v;
-    
-    v.integer = 90;
-    setServoPosition(0,&v);
-    Wait(300);
-    
-    while(1)
-    {
-        getDistanceSensor(0,&v);
-        if (v.integer<300)
-        {
-            motorLeft = 0;
-            motorRight = 0;
-            RProtocolSendJoypad(protocol, motorLeft, motorRight, servomotor, 0, 0, 0, 0, 0);
-            
-            
-            v.integer = 0;
-            setServoPosition(0, &v);
-            Wait(500);
-            
-            getDistanceSensor(0, &v);
-            if (v.integer<300)
-            {
-                v.integer = 180;
-                setServoPosition(0, &v);
-                Wait(500);
-            
-                getDistanceSensor(0, &v);
-                if (v.integer<300)
-                {
-                    motorLeft = -100;
-                    motorRight = -100;
-                    RProtocolSendJoypad(protocol, motorLeft, motorRight, servomotor, 0, 0, 0, 0, 0);
-                    Wait(1000);
-                }
-                else
-                {
-                    motorLeft = -100;
-                    motorRight = 100;
-                    RProtocolSendJoypad(protocol, motorLeft, motorRight, servomotor, 0, 0, 0, 0, 0);
-                    Wait(1000);
-                }
-            }
-            else
-            {
-                motorLeft = 100;
-                motorRight = -100;
-                RProtocolSendJoypad(protocol, motorLeft, motorRight, servomotor, 0, 0, 0, 0, 0);
-                Wait(1000);
-            }
-            
-            v.integer = 90;
-            setServoPosition(0,&v);
-            Wait(300);
-        }
-        else
-        {
-            motorLeft = 100;
-            motorRight = 100;
-            RProtocolSendJoypad(protocol, motorLeft, motorRight, servomotor, 0, 0, 0, 0, 0);
-            Wait(100);
-        }
-        
-        
-        
-    }*/
-    
-    
 }
