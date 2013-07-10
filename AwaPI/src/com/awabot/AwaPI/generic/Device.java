@@ -29,14 +29,14 @@ public abstract class Device extends Component {
 	}
 	
 	/* Integer */
-	public Integer readInt(Object caller, String actionName) throws IllegalStateException {
+	public Integer readInt(String actionName) throws IllegalStateException {
 		if (!canPerformAction(actionName, Action.ACTION_READ, Value.VALUE_INTEGER)) {
 			throw new IllegalStateException("\treadInt in " + this.name + " is not supported");
 		}
 		return NetworkClient.getInstance().readInt(this.name, actionName);
 	}
 	
-	public void writeInt(String deviceName, String actionName, Integer value) throws IllegalStateException {
+	public void writeInt(String actionName, Integer value) throws IllegalStateException {
 		if (!canPerformAction(actionName, Action.ACTION_WRITE, Value.VALUE_INTEGER)) {
 			throw new IllegalStateException("\twriteInt in " + this.name + " is not supported");
 		}

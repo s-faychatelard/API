@@ -9,16 +9,16 @@ public class Tourne extends Component {
 		super(name);
 	}
 
-	public void rotateToLeftInDegree(Integer degree) {
-		this.rotate(-150, 150);
+	public void rotateLeft(Integer speed) {
+		this.rotate(-speed, speed);
 	}
 	
-	public void rotateToRightInDegree(Integer degree) {
-		this.rotate(150, -150);
+	public void rotateRight(Integer speed) {
+		this.rotate(speed, -speed);
 	}
 	
 	public void rotate(Integer leftSpeed, Integer rightSpeed) {
-		AwaPI.getComponentById("leftWheel").exec("setSpeed", leftSpeed);
-		AwaPI.getComponentById("rightWheel").exec("setSpeed", rightSpeed);
+		AwaPI.getComponentById(alias("leftWheel")).exec("setSpeed", leftSpeed);
+		AwaPI.getComponentById(alias("rightWheel")).exec("setSpeed", rightSpeed);
 	}
 }

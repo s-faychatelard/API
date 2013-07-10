@@ -10,6 +10,11 @@ public class Servo extends Device {
 
 	public Integer getPosition() {
 		System.out.println("Get position of " + this.name);
-		return this.readInt(this.name, "getPosition");
+		return this.readInt("getPosition");
+	}
+	
+	public void setPosition(Integer position) {
+		System.out.println("Set position of " + this.name);
+		this.writeInt("setPosition", position);
 	}
 }
