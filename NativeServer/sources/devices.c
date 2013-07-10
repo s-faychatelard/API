@@ -76,7 +76,6 @@ unsigned int initDevicesTable(List * devices)
 
 Device * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize)
 {
-    unsigned int index = 0;
     Device *	ptr;
     
     ListNode *n = devices->first;
@@ -95,7 +94,7 @@ Device * getDeviceByName(List * devices, unsigned char * name, unsigned int name
     return 0;
 }
 
-DevicePhysical * getDevicePhysicalByName(List * physicals, char * name)
+DevicePhysical * getDevicePhysicalByName(List * physicals, const char * name)
 {
     DevicePhysical * ptr;
     ListNode *n = physicals->first;

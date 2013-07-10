@@ -50,7 +50,7 @@ void resetByteStream(ByteStream * stream)
 
 unsigned int getByteStreamSize(ByteStream * stream)
 {
-    return (stream->current - stream->buffer);
+    return (unsigned int)(stream->current - stream->buffer);
 }
 
 void write1ToByteStream(ByteStream * stream, unsigned char data)

@@ -978,7 +978,7 @@ int readChar (SimpleXmlParserState parser) {
  * no more data.
  */
 char peekInputCharAt (SimpleXmlParserState parser, int nOffset) {
-	int nPos= parser->nInputDataPos + nOffset;
+	int nPos= (int)parser->nInputDataPos + nOffset;
 	if (nPos < 0 || nPos >= parser->nInputDataSize) {
 		return '\0';
 	}
@@ -1266,7 +1266,7 @@ int getSimpleXmlValueBufferContentLength (SimpleXmlValueBuffer vb) {
 	if (vb == NULL) {
 		return 0;
 	}
-	return vb->nPosition + 1;
+	return (int)vb->nPosition + 1;
 }
 
 /**
@@ -1286,7 +1286,7 @@ int getSimpleXmlValueBufferContents (SimpleXmlValueBuffer vb, char* szOutput, lo
 		return FAIL;
 	}
 	nMaxLen-= 1; /* reserve space for terminating zero */
-	nMax= nMaxLen < vb->nPosition ? nMaxLen : vb->nPosition;
+	nMax= (int) ((nMaxLen < vb->nPosition) ? nMaxLen : vb->nPosition);
 	memcpy(szOutput, vb->sBuffer, nMax);
 	szOutput[nMax]= '\0';
 	return SUCCESS;

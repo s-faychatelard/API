@@ -73,7 +73,7 @@ extern unsigned int initDevicesTable(List * devices);
 
 extern unsigned int initDeviceAction(List *actions);
 
-extern DevicePhysical * getDevicePhysicalByName(List * physicals, char * name);
+extern DevicePhysical * getDevicePhysicalByName(List * physicals, const char * name);
 
 extern Device * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize);
 
