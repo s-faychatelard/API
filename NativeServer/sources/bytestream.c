@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../includes/ByteStream.h"
+#include "../includes/bytestream.h"
 
 unsigned int get4FromBuffer(unsigned char *buffer)
 {

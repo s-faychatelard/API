@@ -22,11 +22,11 @@ static long int getFileSize( int fp )
 {
     long int save_pos, size_of_file;
     
-    save_pos = lseek(fp,0,SEEK_CUR);
+    save_pos = (long int)lseek(fp,0,SEEK_CUR);
     
 	lseek( fp, 0L, SEEK_SET );
     
-	size_of_file = lseek(fp, 0L,SEEK_END);
+	size_of_file = (long int)lseek(fp, 0L,SEEK_END);
     
 	lseek( fp, save_pos, SEEK_SET);
     
