@@ -16,11 +16,23 @@ public abstract class Device extends Component {
 		super(name);
 	}
 	
-	/* Actions */
+	/**
+	 * Add an action for this device.
+	 * @param actionName	Name of action (for example "setPosition")
+	 * @param action		Action type (read or write)
+	 * @param value			Value type (integer, array...)
+	 */
 	public void addAction(String actionName, Action action, Value value) {
 		actions.put(actionName, String.valueOf(action) + "_" + String.valueOf(value));
 	}
 	
+	/** 
+	 * Check if we can invoke an action on this device.
+	 * @param actionName	Name of action
+	 * @param action		Action type
+	 * @param value			Value type
+	 * @return	true if we can call this device's action.
+	 */
 	private boolean canPerformAction(String actionName, Action action, Value value) {
 		if (actions.get(actionName) != null && actions.get(actionName).compareTo(String.valueOf(action) + "_" + String.valueOf(value)) == 0) {
 			return true;
@@ -28,7 +40,12 @@ public abstract class Device extends Component {
 		return false;
 	}
 	
-	/* Integer */
+	/**
+	 * Read an integer value from this action's device.
+	 * @param actionName	Name of action
+	 * @return The integer read on the Native Server.
+	 * @throws IllegalStateException
+	 */
 	public Integer readInt(String actionName) throws IllegalStateException {
 		if (!canPerformAction(actionName, Action.ACTION_READ, Value.VALUE_INTEGER)) {
 			throw new IllegalStateException("\treadInt in " + this.name + " is not supported");
@@ -36,6 +53,12 @@ public abstract class Device extends Component {
 		return NetworkClient.getInstance().readInt(this.name, actionName);
 	}
 	
+	/**
+	 * Write an integer on this action's device.
+	 * @param actionName	Name of action
+	 * @param value			Value to be written
+	 * @throws IllegalStateException
+	 */
 	public void writeInt(String actionName, Integer value) throws IllegalStateException {
 		if (!canPerformAction(actionName, Action.ACTION_WRITE, Value.VALUE_INTEGER)) {
 			throw new IllegalStateException("\twriteInt in " + this.name + " is not supported");
@@ -43,7 +66,9 @@ public abstract class Device extends Component {
 		NetworkClient.getInstance().writeInt(this.name, actionName, value);
 	}
 	
-	/* Enum */
+	/**
+	 * Type of value for a device's action.
+	 */
 	public enum Value
 	{
 		VALUE_UNKNONW(0x00),
@@ -65,6 +90,10 @@ public abstract class Device extends Component {
 		}
 	}
 
+	/**
+	 * Type of action for a device's action.
+	 *
+	 */
 	public enum Action
 	{
 	    ACTION_UNKNONW(0x00),

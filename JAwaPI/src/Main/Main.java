@@ -1,6 +1,7 @@
 package Main;
 
 import com.awabot.AwaPI.AwaPI;
+import com.awabot.AwaPI.generic.GlobalFactory;
 
 public class Main {
 
@@ -18,7 +19,7 @@ public class Main {
 			System.err.println(e.getMessage());
 			AwaPI.shutdown();
 		}
-		
+				
 		try {
 
 			AwaPI.getComponentById("avoider").exec("avoid");

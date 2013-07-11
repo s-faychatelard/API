@@ -4,6 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A generic component is identified by a unique name.
+ * It can also include other component, identified by name/alias.
+ * 
+ */
 public abstract class Component {
 	
 	protected final String name;
@@ -13,16 +18,33 @@ public abstract class Component {
 		this.name = name;
 	}
 	
+	/** 
+	 * Add an alias for the component used by this component.
+	 * @param name 		Component's name
+	 * @param alias		Alias's name
+	 */
 	public void addAlias(String name, String alias) {
 		deviceNames.put(name, alias);
 	}
 	
+	/**
+	 * Get the component's name from the speficied name or alias
+	 * @param name		the Component's name or a component's alias
+	 * @return	The component name
+	 */
 	protected String alias(String name) {
 		if (!deviceNames.containsKey(name))
 			return name;
 		return deviceNames.get(name);
 	}
 	
+	/** 
+	 * Execute a method on this component
+	 * @param methodName	Name of methods
+	 * @param args			Argument for this method
+	 * @return	Depends of methods.
+	 * @throws IllegalStateException
+	 */
 	public Object exec(String methodName, Object ... args) throws IllegalStateException {
 		
 		Class<?> classes[] = null;
