@@ -123,7 +123,7 @@ public abstract class NetworkClient {
 		return readStream.read32Bits();
 	}
 	
-	public void writeHeader(Integer sizeToSend, byte command) {
+	private void writeHeader(Integer sizeToSend, byte command) {
 		
 		// Header
 		// 4 octets Magic
@@ -143,7 +143,7 @@ public abstract class NetworkClient {
 		writeStream.write8Bits(command);
 	}
 	
-	public void readTable() {
+	private void readTable() {
 		// Command get table
 		// 4 octets Devices number
 		// 4 octets Name size
@@ -182,7 +182,7 @@ public abstract class NetworkClient {
 		}
 	}
 	
-	public void readAction(Device device) {
+	private void readAction(Device device) {
 		// Action
 		// 1 octet  Type action (READ | WRITE)
 		// 1 octet  Type value ( UNKNOWN | INTEGER | FLOAT | ... )

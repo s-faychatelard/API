@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="POB">
+    <component name="avance" type="components.navigation.Avance" standard="true"/>
+    <component name="tourne" type="components.navigation.Tourne" standard="true"/>
+    <component name="avoider" type="components.navigation.Avoider" standard="true"/>
+</robot>

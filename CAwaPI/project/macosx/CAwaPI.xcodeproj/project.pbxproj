@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C52246651786C2FC003C7F66 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C52246641786C2FC003C7F66 /* libstdc++.6.dylib */; };
+		E447231D178EAF19002DCE5A /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E447231C178EAF19002DCE5A /* libzmq.a */; };
+		E447231F178EAF8F002DCE5A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E447231E178EAF8F002DCE5A /* main.cpp */; };
+		E4472322178EAFC6002DCE5A /* AwaPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4472321178EAFC6002DCE5A /* AwaPI.cpp */; };
+		E4472330178EB157002DCE5A /* component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E447232D178EB157002DCE5A /* component.cpp */; };
+		E4472331178EB157002DCE5A /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E447232E178EB157002DCE5A /* device.cpp */; };
+		E4472332178EB157002DCE5A /* globalfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E447232F178EB157002DCE5A /* globalfactory.cpp */; };
+		E44C27BA178ED8440031BC79 /* libbabcode-macosx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E44C27B9178ED8440031BC79 /* libbabcode-macosx.a */; };
+		E44C27BE178ED9D40031BC79 /* networkclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E44C27BD178ED9D40031BC79 /* networkclient.cpp */; };
+		E44C27C1178EE8CC0031BC79 /* zmqnetworkclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E44C27C0178EE8CC0031BC79 /* zmqnetworkclient.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C55121941786BD9600DAC8A0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C52246641786C2FC003C7F66 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		C55121961786BD9600DAC8A0 /* CAwaPI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CAwaPI; sourceTree = BUILT_PRODUCTS_DIR; };
+		E447231C178EAF19002DCE5A /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = ../../libs/libzmq.a; sourceTree = "<group>"; };
+		E447231E178EAF8F002DCE5A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../sources/main.cpp; sourceTree = "<group>"; };
+		E4472320178EAFB1002DCE5A /* AwaPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AwaPI.h; path = ../../includes/AwaPI.h; sourceTree = "<group>"; };
+		E4472321178EAFC6002DCE5A /* AwaPI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AwaPI.cpp; path = ../../sources/AwaPI.cpp; sourceTree = "<group>"; };
+		E4472328178EB140002DCE5A /* component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = component.h; path = ../../includes/component.h; sourceTree = "<group>"; };
+		E4472329178EB140002DCE5A /* device.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = device.h; path = ../../includes/device.h; sourceTree = "<group>"; };
+		E447232A178EB140002DCE5A /* globalfactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = globalfactory.h; path = ../../includes/globalfactory.h; sourceTree = "<group>"; };
+		E447232D178EB157002DCE5A /* component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = component.cpp; path = ../../sources/component.cpp; sourceTree = "<group>"; };
+		E447232E178EB157002DCE5A /* device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = device.cpp; path = ../../sources/device.cpp; sourceTree = "<group>"; };
+		E447232F178EB157002DCE5A /* globalfactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = globalfactory.cpp; path = ../../sources/globalfactory.cpp; sourceTree = "<group>"; };
+		E44C27B9178ED8440031BC79 /* libbabcode-macosx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbabcode-macosx.a"; path = "../../libs/libbabcode-macosx.a"; sourceTree = "<group>"; };
+		E44C27BD178ED9D40031BC79 /* networkclient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = networkclient.cpp; path = ../../sources/networkclient.cpp; sourceTree = "<group>"; };
+		E44C27BF178ED9D90031BC79 /* networkclient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = networkclient.h; path = ../../includes/networkclient.h; sourceTree = "<group>"; };
+		E44C27C0178EE8CC0031BC79 /* zmqnetworkclient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zmqnetworkclient.cpp; path = ../../sources/zmqnetworkclient.cpp; sourceTree = "<group>"; };
+		E44C27C2178EE8D10031BC79 /* zmqnetworkclient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zmqnetworkclient.h; path = ../../includes/zmqnetworkclient.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C55121931786BD9600DAC8A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E44C27BA178ED8440031BC79 /* libbabcode-macosx.a in Frameworks */,
+				E447231D178EAF19002DCE5A /* libzmq.a in Frameworks */,
+				C52246651786C2FC003C7F66 /* libstdc++.6.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C522467E178C02D9003C7F66 /* xml-components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "xml-components";
+			sourceTree = "<group>";
+		};
+		C551218D1786BD9600DAC8A0 = {
+			isa = PBXGroup;
+			children = (
+				C55121A31786BDCE00DAC8A0 /* includes */,
+				C55121A21786BDC300DAC8A0 /* sources */,
+				C522467E178C02D9003C7F66 /* xml-components */,
+				E4472317178D55D7002DCE5A /* libs */,
+				C55121971786BD9600DAC8A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C55121971786BD9600DAC8A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C55121961786BD9600DAC8A0 /* CAwaPI */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C55121A21786BDC300DAC8A0 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27BC178ED9480031BC79 /* network */,
+				E447232C178EB14A002DCE5A /* generic */,
+				E4472321178EAFC6002DCE5A /* AwaPI.cpp */,
+				E447231E178EAF8F002DCE5A /* main.cpp */,
+			);
+			name = sources;
+			sourceTree = "<group>";
+		};
+		C55121A31786BDCE00DAC8A0 /* includes */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27BB178ED9430031BC79 /* network */,
+				E447232B178EB143002DCE5A /* generic */,
+				E4472320178EAFB1002DCE5A /* AwaPI.h */,
+			);
+			name = includes;
+			sourceTree = "<group>";
+		};
+		E4472317178D55D7002DCE5A /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				E447231C178EAF19002DCE5A /* libzmq.a */,
+				E44C27B9178ED8440031BC79 /* libbabcode-macosx.a */,
+				C52246641786C2FC003C7F66 /* libstdc++.6.dylib */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		E447232B178EB143002DCE5A /* generic */ = {
+			isa = PBXGroup;
+			children = (
+				E4472328178EB140002DCE5A /* component.h */,
+				E4472329178EB140002DCE5A /* device.h */,
+				E447232A178EB140002DCE5A /* globalfactory.h */,
+			);
+			name = generic;
+			sourceTree = "<group>";
+		};
+		E447232C178EB14A002DCE5A /* generic */ = {
+			isa = PBXGroup;
+			children = (
+				E447232D178EB157002DCE5A /* component.cpp */,
+				E447232E178EB157002DCE5A /* device.cpp */,
+				E447232F178EB157002DCE5A /* globalfactory.cpp */,
+			);
+			name = generic;
+			sourceTree = "<group>";
+		};
+		E44C27BB178ED9430031BC79 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27BF178ED9D90031BC79 /* networkclient.h */,
+				E44C27C2178EE8D10031BC79 /* zmqnetworkclient.h */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
+		E44C27BC178ED9480031BC79 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27BD178ED9D40031BC79 /* networkclient.cpp */,
+				E44C27C0178EE8CC0031BC79 /* zmqnetworkclient.cpp */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C55121951786BD9600DAC8A0 /* CAwaPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C551219F1786BD9600DAC8A0 /* Build configuration list for PBXNativeTarget "CAwaPI" */;
+			buildPhases = (
+				C55121921786BD9600DAC8A0 /* Sources */,
+				C55121931786BD9600DAC8A0 /* Frameworks */,
+				C55121941786BD9600DAC8A0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CAwaPI;
+			productName = NativeServer;
+			productReference = C55121961786BD9600DAC8A0 /* CAwaPI */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C551218E1786BD9600DAC8A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Dviance;
+			};
+			buildConfigurationList = C55121911786BD9600DAC8A0 /* Build configuration list for PBXProject "CAwaPI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C551218D1786BD9600DAC8A0;
+			productRefGroup = C55121971786BD9600DAC8A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C55121951786BD9600DAC8A0 /* CAwaPI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C55121921786BD9600DAC8A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4472332178EB157002DCE5A /* globalfactory.cpp in Sources */,
+				E4472330178EB157002DCE5A /* component.cpp in Sources */,
+				E4472331178EB157002DCE5A /* device.cpp in Sources */,
+				E4472322178EAFC6002DCE5A /* AwaPI.cpp in Sources */,
+				E447231F178EAF8F002DCE5A /* main.cpp in Sources */,
+				E44C27C1178EE8CC0031BC79 /* zmqnetworkclient.cpp in Sources */,
+				E44C27BE178ED9D40031BC79 /* networkclient.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C551219D1786BD9600DAC8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C551219E1786BD9600DAC8A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C55121A01786BD9600DAC8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../../babcode/babcode/include/\"",
+					"\"$(SRCROOT)/../../libs/zmq\"",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/../../libs/zeromq\\\"",
+					"$(SRCROOT)/../../libs",
+				);
+				PRODUCT_NAME = CAwaPI;
+			};
+			name = Debug;
+		};
+		C55121A11786BD9600DAC8A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../../babcode/babcode/include/\"",
+					"\"$(SRCROOT)/../../libs/zmq\"",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/../../libs/zeromq\\\"",
+					"$(SRCROOT)/../../libs",
+				);
+				PRODUCT_NAME = CAwaPI;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C55121911786BD9600DAC8A0 /* Build configuration list for PBXProject "CAwaPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C551219D1786BD9600DAC8A0 /* Debug */,
+				C551219E1786BD9600DAC8A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C551219F1786BD9600DAC8A0 /* Build configuration list for PBXNativeTarget "CAwaPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C55121A01786BD9600DAC8A0 /* Debug */,
+				C55121A11786BD9600DAC8A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C551218E1786BD9600DAC8A0 /* Project object */;
+}
