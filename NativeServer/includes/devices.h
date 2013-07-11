@@ -9,19 +9,22 @@
 #ifndef NativeServer_devices_h
 #define NativeServer_devices_h
 
+/** @brief Type of value */
 typedef enum _value_type_
 {
-    VALUE_UNKNONW = 0x00,
-    VALUE_INTEGER = 0x01,
-    VALUE_ARRAY = 0x02
+    VALUE_UNKNONW = 0x00,       /**< an unknown value */
+    VALUE_INTEGER = 0x01,       /**< this is an integer */
+    VALUE_ARRAY = 0x02          /**< this is an array */
 } ValueType;
 
+/** @brief An array */
 typedef struct _value_array_
 {
-    unsigned int len;
-    unsigned char * buffer;
+    unsigned int len;           /**< size of array */
+    unsigned char * buffer;     /**< array's data */
 } ArrayValue;
 
+/** @brief A value */
 typedef union _value_
 {
     int             wantedSize; /**< size we want when we read a value */
@@ -34,13 +37,18 @@ typedef struct _device_object_ DeviceObject;
 
 typedef void (*ActionCallback)(DeviceObject * device, Value * value);
 
+/** @brief Type of action */
 typedef enum _action_type_
 {
-    ACTION_UNKNONW  = 0x00,
-    ACTION_READ     = 0x01,
-    ACTION_WRITE    = 0x02
+    ACTION_UNKNONW  = 0x00,     /**< an unknown action */
+    ACTION_READ     = 0x01,     /**< read action */
+    ACTION_WRITE    = 0x02      /**< write action */
 } ActionType;
 
+/** @brief An user action
+ *
+ * This structure is used internally, you don't have access to this object.
+ */
 typedef struct _user_action_
 {
     char *          name;   /**< name of action (must be the same as the Java method) */
@@ -48,6 +56,7 @@ typedef struct _user_action_
     ActionCallback  action; /**< user callback */
 } UserDeviceAction;
 
+/** @brief An action for a device */
 typedef struct _action_
 {
     ActionType      type;       /**< type of this action (read or write) */
@@ -57,7 +66,7 @@ typedef struct _action_
     ActionCallback  action;     /**< user callback */
 } DeviceAction;
 
-
+/** @brief A specific device's hardware */
 typedef struct _device_hardware_
 {
     char *          type;       /**< type of this devices ("devices.Motor" for example) */
@@ -65,7 +74,7 @@ typedef struct _device_hardware_
     List            actions;    /**< list of actions for this device */
 } DeviceHardware;
 
-
+/** @brief An instance of the device's hardware */
 struct _device_object_
 {
     char *          name;       /**< identifier for this device ("myNuclearProvidedMotor" for example) */
@@ -74,6 +83,7 @@ struct _device_object_
 };
 
 
+// next functions are for private usage.
 
 extern unsigned int initDevicesTable(List * devices);
 

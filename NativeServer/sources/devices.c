@@ -38,8 +38,6 @@ unsigned int initDeviceAction(List *actions)
     return index;
 }
 
-
-
 unsigned int initDevicesTable(List * devices)
 {
     DeviceObject *	ptr;
@@ -72,7 +70,6 @@ unsigned int initDevicesTable(List * devices)
     
     return index;
 }
-
 
 DeviceObject * getDeviceByName(List * devices, unsigned char * name, unsigned int nameSize)
 {

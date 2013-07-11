@@ -44,8 +44,8 @@ static void writeActionTable(ByteStream * stream, List * actions)
         // action:
         //      1 type action (read / write)
         //      1 type value (integer, float, array)
-        //      4 size
-        //      ... name
+        //      4 size name of action
+        //      ... name of action
         
         size = (unsigned int)strlen(ptr->name);
         
@@ -68,6 +68,7 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
     DeviceObject *	dev;
     DeviceHardware * hw;
     
+    // get table command packet structure
     // 4 magic
     // 4 size total
     // 1 command
@@ -75,15 +76,14 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
     writeProtocolHeader(stream,COMMAND_GET_TABLE);
     write4ToByteStream(stream, devices->size);
     
-    // payload :
+    // table payload :
     ListNode *n = devices->first;
     while (n != NULL)
     {
         dev = (DeviceObject *)n->data;
         
-        // get table
-        // 4 size
-        // ... name
+        // 4 size name of device
+        // ... name of device
         
         nameSize = (unsigned int)strlen(dev->name);
         
@@ -92,8 +92,8 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
         
         hw = dev->hardware;
         
-        // 4 size
-        // ... type
+        // 4 size name of hardware
+        // ... hardware name
         
         nameSize = (unsigned int)strlen(hw->type);
         
@@ -110,12 +110,7 @@ void writeGetTableCommand(ByteStream * stream, List * devices)
 	}
     
     writeProtocolHeaderSize(stream);
-    
-//    printf("writeGetTableCommand: sizeTotal %d\n", sizeTotal);
-    
-    
 }
-
 
 void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * output ,List * devices)
 {
@@ -134,6 +129,7 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     memset(deviceName,0, 255);
     memset(actionName,0, 255);
     
+    // send / get command structure
     // 4 device name size
     // ... device name
     deviceSize = read4FromByteStream(stream);
@@ -152,14 +148,14 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
     device = getDeviceByName(devices, deviceName, deviceSize);
     if (device == 0)
     {
-        printf("execCommand: device %s not found\n", deviceName);
+        printf("execCommand: device %s not found !\n", deviceName);
         return;
     }
     
     action = getDeviceActionByName(device,actionName,actionSize);
     if (action==0)
     {
-        printf("execCommand: action %s not found\n", actionName);
+        printf("execCommand: action %s not found !\n", actionName);
         return;
     }
     
@@ -188,6 +184,7 @@ void execCommand(NetworkCommand command, ByteStream * stream, ByteStream * outpu
                 v.integer = value;
                 break;
             case VALUE_ARRAY:
+                //todo get array address
                 v.array = 0;
                 break;
         }

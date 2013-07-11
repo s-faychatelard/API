@@ -67,6 +67,8 @@
 		C55121961786BD9600DAC8A0 /* NativeServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NativeServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55121A41786BDE000DAC8A0 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../sources/main.c; sourceTree = "<group>"; };
 		C5F772A3178D58B3003AB351 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../../includes/utils.h; sourceTree = "<group>"; };
+		C5F77307178EEBE9003AB351 /* nativeserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nativeserver.h; path = ../../includes/nativeserver.h; sourceTree = "<group>"; };
+		C5F77308178EEBE9003AB351 /* robot-hal-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "robot-hal-private.h"; path = "../../includes/robot-hal-private.h"; sourceTree = "<group>"; };
 		E44722FE178D54C1002DCE5A /* libnativeserverlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnativeserverlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4472310178D5509002DCE5A /* mainlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mainlib.c; path = ../../sources/mainlib.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,10 +132,10 @@
 			isa = PBXGroup;
 			children = (
 				C55121A31786BDCE00DAC8A0 /* includes */,
-				C55121A21786BDC300DAC8A0 /* sources */,
-				C522467E178C02D9003C7F66 /* xml-devices */,
 				E4472317178D55D7002DCE5A /* libs */,
 				C55121971786BD9600DAC8A0 /* Products */,
+				C55121A21786BDC300DAC8A0 /* sources */,
+				C522467E178C02D9003C7F66 /* xml-devices */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +169,7 @@
 				E4472319178D55F6002DCE5A /* utils */,
 				E447231B178D5612002DCE5A /* xml */,
 				C52246661786EFFD003C7F66 /* devices.h */,
+				C5F77307178EEBE9003AB351 /* nativeserver.h */,
 				C52246741786FDA3003C7F66 /* protocol.h */,
 			);
 			name = includes;
@@ -205,6 +208,7 @@
 		E447231A178D5609002DCE5A /* hal */ = {
 			isa = PBXGroup;
 			children = (
+				C5F77308178EEBE9003AB351 /* robot-hal-private.h */,
 				C5224683178C3BC1003C7F66 /* robot-hal.h */,
 			);
 			name = hal;

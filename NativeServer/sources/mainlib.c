@@ -19,7 +19,7 @@
 #include "../includes/simplexml.h"
 #include "../includes/robot-hal.h"
 #include "../includes/utils.h"
-
+#include "../includes/robot-hal-private.h"
 
 #define DEVICE      "device"
 #define PHYSICAL    "physical"
@@ -49,7 +49,7 @@ static void initServer(void)
     int rc = zmq_bind(zSocket, "tcp://*:8687");
     if (rc == -1)
     {
-        printf("Cannot bind error code : %d\n", errno);
+        printf("initServer : Cannot bind error code : %d\n", errno);
         exit(-1);
     }
     
@@ -105,7 +105,7 @@ static void * xmlHandler(SimpleXmlParser parser, SimpleXmlEvent event,
                 currentDevice->hardware = getDevicePhysicalByName(&hardwareList, szValue);
                 if (currentDevice->hardware==0)
                 {
-                    printf("XML ERROR CANT FOUND PHYSICAL DEVICE %s !\n", szValue);
+                    printf("xmlHandler : XML ERROR CANT FOUND PHYSICAL DEVICE %s !\n", szValue);
                 }
             }
         }
@@ -194,12 +194,11 @@ static void initXml(const char * xmlDevicesFile)
     
     xmlBuffer = fileRead((char *)xmlDevicesFile, &xmlSize);
     
-    printf("initialize xml (%d)\n", xmlSize);
+    printf("initialize xml from %s (%d)\n",xmlDevicesFile ,xmlSize);
     
     parser = simpleXmlCreateParser((char *)xmlBuffer, xmlSize);
     
     simpleXmlParse(parser, xmlHandler);
-    
     
     free(xmlBuffer);
 }
@@ -250,7 +249,7 @@ int startNativeServer(const char * xmlDevicesFile)
             
             if (magic!=PROTOCOL_MAGIC)
             {
-                printf("ERROR: Bad magic number !\n");
+                printf("nativeServer : error, bad magic number !\n");
                 continue;
             }
             

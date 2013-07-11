@@ -4,6 +4,8 @@
 
 #include "../includes/bytestream.h"
 
+//----------------------------- private functions
+
 unsigned int get4FromBuffer(unsigned char *buffer)
 {
 	unsigned int integer = ((buffer)[0]<<24)| ((buffer)[1]<<16)|((buffer)[2]<<8)|((buffer)[3]);
@@ -32,6 +34,7 @@ void set2ToBuffer(unsigned char *buffer, unsigned short integer)
 	buffer[1] = (unsigned char)(integer);
 }
 
+//----------------------------- public functions
 
 ByteStream * newByteStream(unsigned char * input)
 {
