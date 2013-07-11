@@ -1,5 +1,8 @@
 #include "../includes/device.h"
 
+#include "../includes/hash.h"
+#include "../includes/networkclient.h"
+
 #include <string.h>
 
 Device::Device(char* name) : Component(name)
@@ -55,8 +58,7 @@ int Device::readInt(char* actionName)
         throw message;
     }
     
-    //return NetworkClient.getInstance().readInt(this.name, actionName);
-    return 0;
+    return NetworkClient::getInstance()->readInt(name, actionName);
 }
 
 void Device::writeInt(char* actionName, int value)
@@ -70,5 +72,5 @@ void Device::writeInt(char* actionName, int value)
         throw message;
     }
     
-    //NetworkClient.getInstance().writeInt(this.name, actionName, value);
+    NetworkClient::getInstance()->writeInt(name, actionName, value);
 }

@@ -17,6 +17,8 @@
 		E44C27BA178ED8440031BC79 /* libbabcode-macosx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E44C27B9178ED8440031BC79 /* libbabcode-macosx.a */; };
 		E44C27BE178ED9D40031BC79 /* networkclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E44C27BD178ED9D40031BC79 /* networkclient.cpp */; };
 		E44C27C1178EE8CC0031BC79 /* zmqnetworkclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E44C27C0178EE8CC0031BC79 /* zmqnetworkclient.cpp */; };
+		E44C27C7178EEDBC0031BC79 /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = E44C27C6178EEDBC0031BC79 /* hash.c */; };
+		E44C27CE178F056B0031BC79 /* avance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E44C27CB178F03CA0031BC79 /* avance.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +51,10 @@
 		E44C27BF178ED9D90031BC79 /* networkclient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = networkclient.h; path = ../../includes/networkclient.h; sourceTree = "<group>"; };
 		E44C27C0178EE8CC0031BC79 /* zmqnetworkclient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zmqnetworkclient.cpp; path = ../../sources/zmqnetworkclient.cpp; sourceTree = "<group>"; };
 		E44C27C2178EE8D10031BC79 /* zmqnetworkclient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zmqnetworkclient.h; path = ../../includes/zmqnetworkclient.h; sourceTree = "<group>"; };
+		E44C27C4178EEDAD0031BC79 /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hash.h; path = ../../includes/hash.h; sourceTree = "<group>"; };
+		E44C27C6178EEDBC0031BC79 /* hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hash.c; path = ../../sources/hash.c; sourceTree = "<group>"; };
+		E44C27CB178F03CA0031BC79 /* avance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = avance.cpp; sourceTree = "<group>"; };
+		E44C27CD178F03D60031BC79 /* avance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avance.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,9 @@
 		C55121A21786BDC300DAC8A0 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				E44C27CA178F03CA0031BC79 /* components */,
+				E44C27C9178EF0EC0031BC79 /* xml */,
+				E44C27C5178EEDB00031BC79 /* utils */,
 				E44C27BC178ED9480031BC79 /* network */,
 				E447232C178EB14A002DCE5A /* generic */,
 				E4472321178EAFC6002DCE5A /* AwaPI.cpp */,
@@ -105,6 +114,9 @@
 		C55121A31786BDCE00DAC8A0 /* includes */ = {
 			isa = PBXGroup;
 			children = (
+				E44C27CC178F03D60031BC79 /* components */,
+				E44C27C8178EF0E70031BC79 /* xml */,
+				E44C27C3178EED9F0031BC79 /* utils */,
 				E44C27BB178ED9430031BC79 /* network */,
 				E447232B178EB143002DCE5A /* generic */,
 				E4472320178EAFB1002DCE5A /* AwaPI.h */,
@@ -158,6 +170,54 @@
 				E44C27C0178EE8CC0031BC79 /* zmqnetworkclient.cpp */,
 			);
 			name = network;
+			sourceTree = "<group>";
+		};
+		E44C27C3178EED9F0031BC79 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27C4178EEDAD0031BC79 /* hash.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		E44C27C5178EEDB00031BC79 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27C6178EEDBC0031BC79 /* hash.c */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		E44C27C8178EF0E70031BC79 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = xml;
+			sourceTree = "<group>";
+		};
+		E44C27C9178EF0EC0031BC79 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = xml;
+			sourceTree = "<group>";
+		};
+		E44C27CA178F03CA0031BC79 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27CB178F03CA0031BC79 /* avance.cpp */,
+			);
+			name = components;
+			path = ../../sources/components;
+			sourceTree = "<group>";
+		};
+		E44C27CC178F03D60031BC79 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				E44C27CD178F03D60031BC79 /* avance.h */,
+			);
+			name = components;
+			path = ../../includes/components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +274,8 @@
 				E4472332178EB157002DCE5A /* globalfactory.cpp in Sources */,
 				E4472330178EB157002DCE5A /* component.cpp in Sources */,
 				E4472331178EB157002DCE5A /* device.cpp in Sources */,
+				E44C27CE178F056B0031BC79 /* avance.cpp in Sources */,
+				E44C27C7178EEDBC0031BC79 /* hash.c in Sources */,
 				E4472322178EAFC6002DCE5A /* AwaPI.cpp in Sources */,
 				E447231F178EAF8F002DCE5A /* main.cpp in Sources */,
 				E44C27C1178EE8CC0031BC79 /* zmqnetworkclient.cpp in Sources */,

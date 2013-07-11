@@ -1,3 +1,6 @@
+#ifndef CAWAPI_DEVICE
+#define CAWAPI_DEVICE
+
 #include "component.h"
 
 class Device : protected Component {
@@ -29,3 +32,5 @@ private:
     char* mergeActionValue(Action action, Value value);
     bool canPerformAction(char* actionName, Action action, Value value);
 };
+
+#endif

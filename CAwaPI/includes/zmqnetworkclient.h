@@ -50,7 +50,7 @@ public class ZmqNetworkClient extends NetworkClient {
 
 #include <zmq.h>
 
-class ZmqNetworkClient : protected NetworkClient {
+class ZmqNetworkClient : public NetworkClient {
 public:
     ZmqNetworkClient();
 	

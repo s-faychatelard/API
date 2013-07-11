@@ -1,3 +1,5 @@
+#ifndef CAWAPI_NETWORKCLIENT
+#define CAWAPI_NETWORKCLIENT
 #include <babcode.h>
 
 #include "device.h"
@@ -36,3 +38,5 @@ protected:
     ByteStream *readStream;
 	ByteStream *writeStream;
 };
+
+#endif

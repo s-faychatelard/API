@@ -1,7 +1,11 @@
 #include "../includes/component.h"
 
+#include "../includes/hash.h"
+
 #include <stdlib.h>
 #include <string.h>
+
+factory g_factory;
 
 Component::Component(char *name)
 {
@@ -26,37 +30,43 @@ void Component::addAlias(char* name, char* alias)
     hashTableInsert(&deviceNames, hash32(name, (int)strlen(name)), alias);
 }
 
-void* Component::exec(char* methodName/*, void* ... args*/)
+/*void* Component::exec(char* methodName, void* ... args)
 {
-    printf("Call %s", methodName);
+    printf("Call %s\n", methodName);
+    /*Class<?> classes[] = null;
+    try {
+        
+        if (args.length == 0) {
+            return this.getClass().getMethod(methodName).invoke(this);
+        }
+        
+        // Construct an array of Class of each parameter
+        classes = new Class<?>[args.length];
+        Integer i=0;
+        for (Object arg : args) {
+            classes[i++] = arg.getClass();
+        }
+        
+        // Get the method and invoke it
+        return this.getClass().getMethod(methodName, classes).invoke(this, args);
+        
+    } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException e) {
+        
+        StringBuilder s = new StringBuilder();
+        Integer i=0;
+        for (@SuppressWarnings("unused") Object a : args) {
+            s.append(classes[i++].toString());
+            s.append(" ");
+        }
+        
+        throw new IllegalStateException("The method " + methodName + " in " + this.getClass()
+                                        + " with parameter" + ((args.length > 1) ? "s" : "")
+                                        + " typed " + s.toString() + "doesn't exist");
+        
+    } catch (InvocationTargetException e) {
+        throw new IllegalStateException("The method " + methodName + " in " + this.getClass() 
+                                        + " failed with error : \n\t" + e.getCause().getMessage());
+    }*
+    
     return 0;
-}
-
-/** Utils */
-
-#define FNV1_32_INIT ((unsigned int)2166136261)
-#define FNV_32_PRIME ((unsigned int)0x01000193)
-
-unsigned int Component::hash32(char* buf, unsigned int len)
-{
-    unsigned int hval = FNV1_32_INIT ;
-    unsigned char *bp = (unsigned char *)buf;	/* start of buffer */
-    unsigned char *be = bp + len;		/* beyond end of buffer */
-    
-    /*
-     * FNV-1 hash each octet in the buffer
-     */
-    while (bp < be)
-    {
-        
-		/* multiply by the 32 bit FNV magic prime mod 2^32 */
-		//hval += (hval<<1) + (hval<<4) + (hval<<7) + (hval<<8) + (hval<<24);
-		hval *= FNV_32_PRIME;
-        
-		/* xor the bottom with the current octet */
-		hval ^= (unsigned int)*bp++;
-    }
-    
-    /* return our new hash value */
-    return hval;
-}
+}*/
