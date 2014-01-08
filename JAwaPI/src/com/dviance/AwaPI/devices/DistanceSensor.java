@@ -1,6 +1,6 @@
-package com.awabot.AwaPI.devices;
+package com.dviance.AwaPI.devices;
 
-import com.awabot.AwaPI.generic.Device;
+import com.dviance.AwaPI.generic.Device;
 
 public class DistanceSensor extends Device {
 

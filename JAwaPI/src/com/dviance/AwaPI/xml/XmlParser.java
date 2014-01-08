@@ -1,4 +1,4 @@
-package com.awabot.AwaPI.xml;
+package com.dviance.AwaPI.xml;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.awabot.AwaPI.generic.Component;
-import com.awabot.AwaPI.generic.GlobalFactory;
+import com.dviance.AwaPI.generic.Component;
+import com.dviance.AwaPI.generic.GlobalFactory;
 
 public class XmlParser {
 	

@@ -1,9 +1,9 @@
-package com.awabot.AwaPI.generic;
+package com.dviance.AwaPI.generic;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.awabot.AwaPI.network.client.NetworkClient;
+import com.dviance.AwaPI.network.client.NetworkClient;
 
 /**
  * Device is a specific component with network access

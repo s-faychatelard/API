@@ -1,7 +1,7 @@
 package Main;
 
-import com.awabot.AwaPI.AwaPI;
-import com.awabot.AwaPI.generic.GlobalFactory;
+import com.dviance.AwaPI.AwaPI;
+import com.dviance.AwaPI.generic.GlobalFactory;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package com.awabot.AwaPI.generic;
+package com.dviance.AwaPI.generic;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class GlobalFactory {
 
-	public final static String API_PREFIX = "com.awabot.AwaPI.";
+	public final static String API_PREFIX = "com.dviance.AwaPI.";
 	
 	private final static Map<String, Component> idPool = new HashMap<String, Component>();
 	private final static Map<String, ArrayList<Component>> typePool = new HashMap<String, ArrayList<Component>>();

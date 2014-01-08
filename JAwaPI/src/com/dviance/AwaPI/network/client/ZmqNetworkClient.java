@@ -1,4 +1,4 @@
-package com.awabot.AwaPI.network.client;
+package com.dviance.AwaPI.network.client;
 
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;

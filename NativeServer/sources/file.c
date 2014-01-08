@@ -2,8 +2,8 @@
 //  file.c
 //  NativeServer
 //
-//  Created by bburles on 09/07/13.
-//  Copyright (c) 2013 Awabot. All rights reserved.
+//  Created by Sylvain Fay-Châtelard, Baptiste Burles on 08/01/14.
+//  Copyright (c) 2013 Dviance, Kliplab. All rights reserved.
 //
 
 #include <stdio.h>

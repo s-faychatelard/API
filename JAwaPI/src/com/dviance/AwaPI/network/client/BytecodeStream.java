@@ -1,4 +1,4 @@
-package com.awabot.AwaPI.network.client;
+package com.dviance.AwaPI.network.client;
 
 public class BytecodeStream {
 	private int currentIndex;

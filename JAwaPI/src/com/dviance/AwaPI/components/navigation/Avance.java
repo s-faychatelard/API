@@ -1,7 +1,7 @@
-package com.awabot.AwaPI.components.navigation;
+package com.dviance.AwaPI.components.navigation;
 
-import com.awabot.AwaPI.AwaPI;
-import com.awabot.AwaPI.generic.Component;
+import com.dviance.AwaPI.AwaPI;
+import com.dviance.AwaPI.generic.Component;
 
 public class Avance extends Component {
 	

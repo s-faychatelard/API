@@ -1,4 +1,4 @@
-package com.awabot.AwaPI.generic;
+package com.dviance.AwaPI.generic;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;

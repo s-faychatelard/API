@@ -1,12 +1,12 @@
-package com.awabot.AwaPI;
+package com.dviance.AwaPI;
 
 import java.util.ArrayList;
 
-import com.awabot.AwaPI.generic.Component;
-import com.awabot.AwaPI.generic.GlobalFactory;
-import com.awabot.AwaPI.network.client.NetworkClient;
-import com.awabot.AwaPI.network.client.ZmqNetworkClient;
-import com.awabot.AwaPI.xml.XmlParser;
+import com.dviance.AwaPI.generic.Component;
+import com.dviance.AwaPI.generic.GlobalFactory;
+import com.dviance.AwaPI.network.client.NetworkClient;
+import com.dviance.AwaPI.network.client.ZmqNetworkClient;
+import com.dviance.AwaPI.xml.XmlParser;
 
 public class AwaPI {
 	

@@ -3,7 +3,7 @@
 //  CAwaPI
 //
 //  Created by Sylvain FAY-CHATELARD on 11/07/13.
-//  Copyright (c) 2013 Dviance. All rights reserved.
+//  Copyright (c) 2014 Dviance. All rights reserved.
 //
 
 #ifndef CAwaPI_hash_h

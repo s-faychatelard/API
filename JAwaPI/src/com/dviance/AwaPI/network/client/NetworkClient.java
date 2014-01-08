@@ -1,13 +1,13 @@
-package com.awabot.AwaPI.network.client;
+package com.dviance.AwaPI.network.client;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import com.awabot.AwaPI.generic.Device;
-import com.awabot.AwaPI.generic.GlobalFactory;
-import com.awabot.AwaPI.generic.Device.Action;
-import com.awabot.AwaPI.generic.Device.Value;
+import com.dviance.AwaPI.generic.Device;
+import com.dviance.AwaPI.generic.GlobalFactory;
+import com.dviance.AwaPI.generic.Device.Action;
+import com.dviance.AwaPI.generic.Device.Value;
 
 public abstract class NetworkClient {
 
